@@ -3,7 +3,7 @@
 Fix frequent typos in multiple languages with a single click in VS Code with Typopo.
 
 ## Disclaimer
-This is very early version of Typopo for VS Code that let’s you only fix English typos in selected typos, either via menu or via `Ctrl+Alt+T` or `Cmd+Option+T`.
+This is a very early version of Typopo for VS Code that let’s you only fix English typos in selected text; either via menu or via `Ctrl+Alt+T` or `Cmd+Option+T`.
 
 The configuration, documentation and packaging are yet to follow. Stay tuned.
 
