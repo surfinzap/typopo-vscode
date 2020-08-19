@@ -2,7 +2,7 @@
 	"name": "typopo-vscode",
 	"displayName": "Typopo for VS Code",
 	"description": "Fix frequent typos in multiple languages with a single click in VS Code with Typopo",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "brano",
 	"engines": {
 		"vscode": "^1.48.0"
@@ -49,7 +49,9 @@
 		"glob": "^7.1.6",
 		"mocha": "^8.0.1",
 		"typescript": "^3.8.3",
-		"typopo": "^2.3.5",
 		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"typopo": "^2.3.5"
 	}
 }
