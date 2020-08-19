@@ -3,6 +3,7 @@
 	"displayName": "Typopo for VS Code",
 	"description": "Fix frequent typos in multiple languages with a single click in VS Code with Typopo",
 	"version": "0.0.1",
+	"publisher": "brano",
 	"engines": {
 		"vscode": "^1.48.0"
 	},
@@ -12,6 +13,10 @@
 	"activationEvents": [
 		"onCommand:typopo-vscode.fixTypos"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/surfinzap/typopo-vscode.git"
+	},
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
