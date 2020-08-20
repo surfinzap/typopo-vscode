@@ -1,8 +1,8 @@
 {
 	"name": "typopo-vscode",
-	"displayName": "Typopo for VS Code",
+	"displayName": "Typopo",
 	"description": "Fix frequent typos in multiple languages with a single click in VS Code with Typopo",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "brano",
 	"engines": {
 		"vscode": "^1.48.0"
@@ -33,7 +33,36 @@
 				"mac": "cmd+alt+T",
 				"when": "editorTextFocus"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Typopo",
+			"properties": {
+				"typopo.language": {
+					"type": "string",
+					"enum": [
+						"en-us",
+						"de-de",
+						"cs",
+						"rue",
+						"sk"
+					],
+					"enumDescriptions": [
+						"English (US) (en-us)",
+						"German (de-de)",
+						"Czech (cs)",
+						"Rusyn (rue)",
+						"Slovak (sk)"
+					],
+					"default": "en-us",
+					"description": "Select a default language to fix typos"
+				},
+				"typopo.removeLines": {
+					"type": "boolean",
+					"default": false,
+					"description": "Remove empty lines between paragraphs"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",
