@@ -2,7 +2,7 @@
 	"name": "typopo-vscode",
 	"displayName": "Typopo",
 	"description": "Fix frequent typos in multiple languages with a single click in VS Code with Typopo",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "brano",
 	"engines": {
 		"vscode": "^1.48.0"
@@ -30,7 +30,7 @@
 			{
 				"command": "typopo-vscode.fixTypos",
 				"key": "ctrl+alt+T",
-				"mac": "cmd+alt+T",
+				"mac": "ctrl+cmd+T",
 				"when": "editorTextFocus"
 			}
 		],

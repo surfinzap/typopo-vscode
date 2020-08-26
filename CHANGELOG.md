@@ -1,9 +1,11 @@
-# Change Log
+# Change Log for Typopo VS Code extension
 
-All notable changes to the "typopo-vscode" extension will be documented in this file.
+## 0.0.4 // 2020-08-25
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Fixes
+- Change keyboard for shortcut from `Option+CMD+T` to `Ctrl+CMD+T`. Previous shortcut was colliding with `Close Other Editors in Group`.
 
-## [Unreleased]
-
-- Initial release
+## 0.0.3 // 2020-08-20
+Fix typos in the selected text. As of this version you can:
+- set your default language (en-us, de-de, cs, sk, rue)
+- choose whether to remove empty lines the text selection
