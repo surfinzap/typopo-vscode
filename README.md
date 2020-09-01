@@ -76,12 +76,22 @@ Typopo fixes symbols:
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
 
+## Further use
+- check out [Typopo as a free web app](https://typopo.org).
+- use [Typopo library as an NPM package](https://www.npmjs.com/package/typopo)
 - check out [Typopo’s code at Github](https://github.com/surfinzap/typopo)
+
+
 ## Release Notes
+Check out the [changelog](CHANGELOG.md)
+
+
+## Support
 While being free and open source, if you find it useful, please consider supporting it by donating via [PayPal](https://www.paypal.com/paypalme/branosandala) or [Patreon](https://www.patreon.com/branosandala).
 
 ## Feedback
 Iʼd love to hear:
+- how do you use or plan to use Typopo,
 - what you are missing,
 - when you expect Typopo is not fixing typos as it should; in such cases following example would help the most:
 	- *your input*: [provide your text example here]
