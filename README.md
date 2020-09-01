@@ -26,7 +26,7 @@ You can set a default language and choose whether you wish to keep or remove emp
 Typopo fixes punctuation:
 * double quotes (and accidentally-typed punctuation related to the use of double quotes)
 * double primes
-* single quotes (with assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
+* single quotes (with an assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
 * single primes
 * apostrophes
 * hyphens & dashes
@@ -83,7 +83,7 @@ Describe specific features of your extension including screenshots of your exten
 
 
 ## Release Notes
-Check out the [changelog](CHANGELOG.md)
+Check out the [changelog](CHANGELOG.md).
 
 
 ## Support
