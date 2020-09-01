@@ -76,9 +76,19 @@ Typopo fixes symbols:
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
 
+- check out [Typopo’s code at Github](https://github.com/surfinzap/typopo)
 ## Release Notes
+While being free and open source, if you find it useful, please consider supporting it by donating via [PayPal](https://www.paypal.com/paypalme/branosandala) or [Patreon](https://www.patreon.com/branosandala).
+
+## Feedback
+Iʼd love to hear:
+- what you are missing,
+- when you expect Typopo is not fixing typos as it should; in such cases following example would help the most:
+	- *your input*: [provide your text example here]
+	- *expected output*: [show how you want your example to be corrected]
+
+In any case, feel free to drop me a line at <help@typopo.org>.
 
 ## License
 Licensed under MIT license. (See [LICENSE.txt](LICENSE.txt).)
 
-Check out the [changelog](CHANGELOG.md)
