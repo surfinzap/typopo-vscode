@@ -1,6 +1,8 @@
-# typopo-vscode README
+# Typopo extension for VS Code [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Fix%20frequent%20microtypography%20errors%20in%20multiple%20languages%20in%20VS%20Code%20with%20Typopo&url=https://typopo.org&hashtags=vscode,typos,typography,microtypography) [![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=typopo_app)
 
-Fix frequent typos in multiple languages with a single click in VS Code with Typopo.
+![Version](https://img.shields.io/visual-studio-marketplace/v/brano.typopo-vscode?color=%237b00cb&label=Visual%20Studio%20Marketplace&style=flat-square)
+
+Fix frequent microtypography errors in multiple languages in VS Code with [Typopo](https://typopo.org).
 
 ## Disclaimer
 This is a very early version of Typopo for VS Code that let’s you only fix English typos in selected text; either via menu or via `Ctrl+Alt+T` or `Ctrl+Cmd+T`.
