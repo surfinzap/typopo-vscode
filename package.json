@@ -1,7 +1,7 @@
 {
 	"name": "typopo-vscode",
 	"displayName": "Typopo",
-	"description": "Fix frequent typos in multiple languages with a single click in VS Code with Typopo",
+	"description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo",
 	"version": "0.0.4",
 	"publisher": "brano",
 	"engines": {
