@@ -8,72 +8,74 @@ Fix frequent microtypography errors in multiple languages in VS Code with [Typop
 ![Fixing microtypography in VS Code](assets/typopo--vs-code-animation.gif "Fixing microtypography in VS Code")
 
 ## Use 
+1. Select text you wish to fix
+2. Fix it, either by `Typopo: Fix Typos` via menu or via `Ctrl+Alt+T` (Win) or `Ctrl+Cmd+T` (Mac).
 
-This is a very early version of Typopo for VS Code that let’s you only fix English typos in selected text; either via menu or via `Ctrl+Alt+T` or `Ctrl+Cmd+T`.
+## Settings
+You can set a default language and choose whether you wish to keep or remove empty lines. You can fix microtypography for:
+- English,
+- German,
+- Rusyn,
+- Czech,
+- Slovak texts. 
 
-A documentation and packaging are yet to follow. Stay tuned.
-
-↓↓↓ Don’t bother the scaffolding text for now, I’ll fix it soon.↓↓↓
+![Typopo Settings in VS Code](assets/typopo--vs-code-settings.png "Typopo Settings in VS Code")
 
 
 ## Features
+Typopo fixes punctuation:
+* double quotes (and accidentally-typed punctuation related to the use of double quotes)
+* double primes
+* single quotes (with assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
+* single primes
+* apostrophes
+* hyphens & dashes
+	* between words with a proper spacing per locale
+	* between ordinal and cardinal numbers
+	* within date
+	* between percentage range
+* period & ellipsis
+
+Typopo fixes whitespace characters:
+* removes extra white spaces
+	* at the beginning and the end of sentences (leading and trailing spaces)
+	* between words and paragraphs
+	* before or after a punctuation
+	* around an ellipsis and an aposiopesis (where applicable)
+	* between a number sign (#) and a number
+	* before ordinal indicators (e.g. 1 st → 1st)
+* removes empty lines
+* fixes non-breaking spaces
+	* removes nbsp between multi-letter words
+	* adds nbsp
+		* after one-word prepositions
+		* around “×”
+		* after “&”
+		* after cardinal numbers
+		* after ordinal numbers
+		* ordinal Roman numerals
+		* after name initials (i.e. Philip K. Dick)
+		* after common single-word and multiple-word abbreviations
+	* replaces space with nbsp before % (percent), ‰ (per mille), ‱ (permyriad)
+
+Typopo fixes words:
+* accidental uPPERCASE
+* spelling of e.g., i.e., a.m. and p.m.
+* ISSN and ISBN formatting
+
+Typopo fixes symbols:
+* multiplication sign (×)
+* section sign (§)
+* copyright (©)
+* sound recording copyright (℗)
+* registered trademark (®)
+* trademark (™)
+* plus-minus sign (+-, -+ → ±)
+* square and cube exponents (e.g. 100 µm² → 100 µm², 50 km³ → 50 km³)
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+Check out the [changelog](CHANGELOG.md)
