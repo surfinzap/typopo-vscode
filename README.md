@@ -78,4 +78,7 @@ Describe specific features of your extension including screenshots of your exten
 
 ## Release Notes
 
+## License
+Licensed under MIT license. (See [LICENSE.txt](LICENSE.txt).)
+
 Check out the [changelog](CHANGELOG.md)
