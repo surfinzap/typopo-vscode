@@ -4,6 +4,7 @@
 	"description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo",
 	"version": "0.0.4",
 	"publisher": "brano",
+	"icon": "assets/typopo--logotype--128.png",
 	"engines": {
 		"vscode": "^1.48.0"
 	},
