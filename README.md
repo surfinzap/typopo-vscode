@@ -4,7 +4,11 @@
 
 Fix frequent microtypography errors in multiple languages in VS Code with [Typopo](https://typopo.org).
 
-## Disclaimer
+
+![Fixing microtypography in VS Code](assets/typopo--vs-code-animation.gif "Fixing microtypography in VS Code")
+
+## Use 
+
 This is a very early version of Typopo for VS Code that let’s you only fix English typos in selected text; either via menu or via `Ctrl+Alt+T` or `Ctrl+Cmd+T`.
 
 A documentation and packaging are yet to follow. Stay tuned.
