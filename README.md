@@ -87,7 +87,9 @@ Check out the [changelog](CHANGELOG.md).
 
 
 ## Support
-While being free and open source, if you find it useful, please consider supporting it by donating via [PayPal](https://www.paypal.com/paypalme/branosandala) or [Patreon](https://www.patreon.com/branosandala).
+If you love Typopo and you find it helpful, [support the project via Patreon](https://www.patreon.com/branosandala).
+
+Your support will let me continue improving Typopo ecosystem—[the app](https://typopo.org), [NPM package](https://www.npmjs.com/package/typopo) and [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=brano.typopo-vscode).
 
 
 ## Feedback
