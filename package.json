@@ -11,6 +11,19 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"typopo-vscode",
+		"microtypography",
+		"typography",
+		"typos",
+		"typo",
+		"English",
+		"German",
+		"Slovak",
+		"Czech",
+		"Rusyn",
+		"keybindings"
+	],
 	"activationEvents": [
 		"onCommand:typopo-vscode.fixTypos"
 	],
