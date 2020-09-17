@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/visual-studio-marketplace/v/brano.typopo-vscode?color=%237b00cb&label=Visual%20Studio%20Marketplace&style=flat-square)
 
-Fix frequent microtypography errors in multiple languages in VS Code with [Typopo](https://typopo.org).
+> Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.
 
 
 ![Fixing microtypography in VS Code](assets/typopo--vs-code-animation.gif "Fixing microtypography in VS Code")
