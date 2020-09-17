@@ -91,7 +91,7 @@ While being free and open source, if you find it useful, please consider support
 
 
 ## Feedback
-Have you found a bug? Do you have an idea for a feature request? You’re more then welcome to [submit an issue here on GitHub](https://github.com/surfinzap/typopo/issues/new/choose).
+Have you found a bug? Do you have an idea for a feature request? You’re more then welcome to [submit an issue here on GitHub](https://github.com/surfinzap/typopo-vscode/issues/new/choose).
 
 If you prefer to reach out me via email, feel free to drop me a line at <help@typopo.org>.
 
