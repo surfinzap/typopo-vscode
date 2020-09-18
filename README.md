@@ -1,11 +1,24 @@
-# Typopo extension for VS Code [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Fix%20frequent%20microtypography%20errors%20in%20multiple%20languages%20in%20VS%20Code%20with%20Typopo&url=https://typopo.org&hashtags=vscode,typos,typography,microtypography) [![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=typopo_app)
-
+# Typopo extension for VS Code 
 ![Version](https://img.shields.io/visual-studio-marketplace/v/brano.typopo-vscode?color=%237b00cb&label=Visual%20Studio%20Marketplace&style=flat-square)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Fix%20frequent%20microtypography%20errors%20in%20multiple%20languages%20in%20VS%20Code%20with%20Typopo&url=https://typopo.org&hashtags=vscode,typos,typography,microtypography) [![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=typopo_app)
+
 
 > Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.
 
 
 ![Fixing microtypography in VS Code](assets/typopo--vs-code-animation.gif "Fixing microtypography in VS Code")
+
+## Contents
+- [Typopo extension for VS Code](#typopo-extension-for-vs-code)
+	- [Contents](#contents)
+	- [Use](#use)
+	- [Settings](#settings)
+	- [Features](#features)
+	- [Further use](#further-use)
+	- [News & Releases](#news-releases)
+	- [Support](#support)
+	- [Feedback](#feedback)
+	- [License](#license)
 
 ## Use 
 1. Select text you wish to fix
@@ -24,62 +37,60 @@ You can set a default language and choose whether you wish to keep or remove emp
 
 ## Features
 Typopo fixes punctuation:
-* double quotes (and accidentally-typed punctuation related to the use of double quotes)
-* double primes
-* single quotes (with an assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
-* single primes
-* apostrophes
-* hyphens & dashes
-	* between words with a proper spacing per locale
-	* between ordinal and cardinal numbers
-	* within date
-	* between percentage range
-* period & ellipsis
+- double quotes (and accidentally-typed punctuation related to the use of double quotes)
+- double primes
+- single quotes (with an assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
+- single primes
+- apostrophes
+- hyphens & dashes
+	- between words with a proper spacing per locale 
+	- between ordinal and cardinal numbers (e.g. 1–3 eggs)
+	- within date (e.g. 2020–08–04)
+	- between percentage range (e.g. 20–30 %)
+- period & ellipsis
 
 Typopo fixes whitespace characters:
-* removes extra white spaces
-	* at the beginning and the end of sentences (leading and trailing spaces)
-	* between words and paragraphs
-	* before or after a punctuation
-	* around an ellipsis and an aposiopesis (where applicable)
-	* between a number sign (#) and a number
-	* before ordinal indicators (e.g. 1 st → 1st)
-* removes empty lines
-* fixes non-breaking spaces
-	* removes nbsp between multi-letter words
-	* adds nbsp
-		* after one-word prepositions
-		* around “×”
-		* after “&”
-		* after cardinal numbers
-		* after ordinal numbers
-		* ordinal Roman numerals
-		* after name initials (i.e. Philip K. Dick)
-		* after common single-word and multiple-word abbreviations
-	* replaces space with nbsp before % (percent), ‰ (per mille), ‱ (permyriad)
+- removes extra white spaces
+	- at the beginning and the end of sentences (leading and trailing spaces)
+	- between words and paragraphs
+	- before or after a punctuation (where applicable)
+	- around an ellipsis and an aposiopesis (where applicable)
+	- between a number sign (#) and a number
+	- before ordinal indicators (e.g. 1 st → 1st)
+- removes empty lines
+- fixes non-breaking spaces
+	- removes a nbsp between multi-letter words
+	- replaces a space with a nbsp
+		- after one-word prepositions
+		- around “×”
+		- after “&”
+		- after cardinal numbers
+		- after ordinal numbers
+		- ordinal Roman numerals
+		- after name initials (i.e. Philip K. Dick)
+		- after common single-word and multiple-word abbreviations
+		- before % (percent), ‰ (per mille), ‱ (permyriad)
 
 Typopo fixes words:
-* accidental uPPERCASE
-* spelling of e.g., i.e., a.m. and p.m.
-* ISSN and ISBN formatting
+- accidental uPPERCASE
+- spelling of e.g., i.e., a.m. and p.m.
+- ISSN and ISBN formatting
 
 Typopo fixes symbols:
-* multiplication sign (×)
-* section sign (§)
-* copyright (©)
-* sound recording copyright (℗)
-* registered trademark (®)
-* trademark (™)
-* plus-minus sign (+-, -+ → ±)
-* square and cube exponents (e.g. 100 µm² → 100 µm², 50 km³ → 50 km³)
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- multiplication sign (2 x 3 → 2 × 3)
+- section sign (§)
+- copyright ((c)2020 → © 2020)
+- sound recording copyright ((p)2020 → ℗ 2020)
+- registered trademark (Brand(r) → Brand®)
+- trademark (Brand(tm) → Brand™)
+- plus-minus sign (+-, -+ → ±)
+- square and cube exponents (e.g. 100 µm² → 100 µm², 50 km³ → 50 km³)
 
 
 ## Further use
-- check out [Typopo as a free web app](https://typopo.org).
-- use [Typopo library as an NPM package](https://www.npmjs.com/package/typopo)
-- check out [Typopo’s code at Github](https://github.com/surfinzap/typopo)
+- [Typopo as a free web app](https://typopo.org).
+- [Typopo as an NPM package](https://www.npmjs.com/package/typopo)
+- [Typopo’s source code at Github](https://github.com/surfinzap/typopo)
 
 
 ## News & Releases
