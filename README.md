@@ -82,8 +82,10 @@ Describe specific features of your extension including screenshots of your exten
 - check out [Typopo’s code at Github](https://github.com/surfinzap/typopo)
 
 
-## Release Notes
-Check out the [changelog](CHANGELOG.md).
+## News & Releases
+Check out the [changelog](CHANGELOG.md) for what’s has been released.
+
+[Subscribe to Typopo Newsletter](https://buttondown.email/Typopo) to be the first to know about all the new features and improvements.
 
 
 ## Support
