@@ -49,6 +49,13 @@ You can set a default language and choose whether you wish to keep or remove emp
 
 
 ## Features
+Typopo fixes microtypography hickups in five languages:
+- English
+- German
+- Czech
+- Slovak
+- Rusyn
+
 Typopo fixes punctuation:
 - double quotes (and accidentally-typed punctuation related to the use of double quotes)
 - double primes
