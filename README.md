@@ -6,10 +6,23 @@
 > Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.
 
 
-![Fixing microtypography in VS Code](assets/typopo--vs-code-animation.gif "Fixing microtypography in VS Code")
+## Fix typos in code
+
+![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--html.gif "Fixing microtypography in VS Code")
+
+Fix your texts with Typopo, so you don’t need to escape \\"dumb quotes\\" or place \&nbsp;. Typopo will place all the relevant characters for you.
+
+## Fix typos in Markdown notes
+
+![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--md.gif "Fixing microtypography in VS Code")
+
+Write neat notes without bothering about all the typography rules.
+
 
 ## Contents
 - [Typopo extension for VS Code](#typopo-extension-for-vs-code)
+	- [Fix typos in code](#fix-typos-in-code)
+	- [Fix typos in Markdown notes](#fix-typos-in-markdown-notes)
 	- [Contents](#contents)
 	- [Use](#use)
 	- [Settings](#settings)
