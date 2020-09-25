@@ -108,7 +108,7 @@ Typopo fixes symbols:
 
 
 ## Further use
-- [Typopo as a free web app](https://typopo.org).
+- [Typopo as a free web app](https://typopo.org)
 - [Typopo as an NPM package](https://www.npmjs.com/package/typopo)
 - [Typopo’s source code at Github](https://github.com/surfinzap/typopo)
 
@@ -120,9 +120,9 @@ Check out the [changelog](CHANGELOG.md) for what’s has been released.
 
 
 ## Support
-If you love Typopo and you find it helpful, [support the project via Patreon](https://www.patreon.com/branosandala).
+If you love Typopo and you find it helpful, [support the project via Patreon](https://www.patreon.com/branosandala). Or, give it a nice starry review here at marketplace. 
 
-Your support will let me continue improving Typopo ecosystem—[the app](https://typopo.org), [NPM package](https://www.npmjs.com/package/typopo) and [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=brano.typopo-vscode).
+Your support will let me continue improving Typopo ecosystem—[the app](https://typopo.org), [NPM package](https://www.npmjs.com/package/typopo) and [VS Code Extension](https://marketplace.visualstudio.com/items?itemName=brano.typopo-vscode). Thanks!
 
 
 ## Feedback
