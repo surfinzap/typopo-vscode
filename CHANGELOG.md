@@ -1,5 +1,12 @@
 # Change Log for Typopo VS Code extension
 
+## 1.0.1 // 2020-10-03
+
+### Updates
+- Bump Typopo package to its latest version ([2.3.6](https://github.com/surfinzap/typopo/releases/tag/2%2F3%2F6))
+
+
+
 ## 1.0.0 // 2020-09-01
 This version has no functional changes, but I’ve updated the icon and README.md, so it looks like a real extension.
 - Add VS Code extension icon
