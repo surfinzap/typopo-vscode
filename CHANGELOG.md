@@ -1,5 +1,8 @@
 # Change Log for Typopo VS Code extension
 
+## 1.0.2 // 2020-10-03
+This version has no functional changes. I’ve repacked the distribution so it includes all dependencies.
+
 ## 1.0.1 // 2020-10-03
 
 ### Updates
@@ -9,9 +12,10 @@
 
 ## 1.0.0 // 2020-09-01
 This version has no functional changes, but I’ve updated the icon and README.md, so it looks like a real extension.
-- Add VS Code extension icon
+- Add VS Code extension icon
 - Update README.md 
 - Add LICENSE.txt
+
 
 
 
