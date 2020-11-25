@@ -27,7 +27,8 @@ function activate(context) {
 				const extensionConfig = vscode.workspace.getConfiguration('typopo');
 				
 				language = extensionConfig.get('language');
-				config.removeLines = extensionConfig.get('removeLines')
+        config.removeLines = extensionConfig.get('removeLines');
+        config.removeWhitespacesBeforeMarkdownList = extensionConfig.get('removeWhitespacesBeforeMarkdownList');
 				
 				const fixedText = typopo.fixTypos(text, language, config)
 				editor.edit(editBuilder => {

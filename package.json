@@ -2,11 +2,11 @@
 	"name": "typopo-vscode",
 	"displayName": "Typopo",
 	"description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-	"version": "1.0.3",
+	"version": "1.1.0",
 	"publisher": "brano",
 	"icon": "assets/typopo--logotype--128.png",
 	"engines": {
-		"vscode": "^1.50.0"
+		"vscode": "^1.51.0"
 	},
 	"categories": [
 		"Other"
@@ -74,6 +74,11 @@
 					"type": "boolean",
 					"default": false,
 					"description": "Remove empty lines between paragraphs"
+				},
+				"typopo.removeWhitespacesBeforeMarkdownList": {
+					"type": "boolean",
+					"default": false,
+					"description": "Remove whitespaces before a nested Markdown list"
 				}
 			}
 		}
@@ -85,16 +90,16 @@
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.3",
-		"@types/node": "^14.14.6",
-		"@types/vscode": "^1.50.0",
-		"eslint": "^7.12.1",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^14.14.10",
+		"@types/vscode": "^1.51.0",
+		"eslint": "^7.14.0",
 		"glob": "^7.1.6",
-		"mocha": "^8.2.0",
-		"typescript": "^4.0.5",
+		"mocha": "^8.2.1",
+		"typescript": "^4.1.2",
 		"vscode-test": "^1.4.1"
 	},
 	"dependencies": {
-		"typopo": "^2.3.7"
+		"typopo": "^2.4.0"
 	}
 }
