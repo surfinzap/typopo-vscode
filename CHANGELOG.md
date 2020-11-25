@@ -1,5 +1,21 @@
 # Change Log for Typopo VS Code extension
 
+## 1.1.0 // 2020-11-25
+### New features
+New configuration option to remove/keep whitespaces before nested markdown lists. By default, whitespaces before markdown list are kept.
+
+**Typopo now keeps nested lists:**
+
+![Typopo keeps nested lists](assets/typopo-keeps-nested-lists.gif "Typopo keeps nested lists")
+
+**Optionally, you can set whitespaces before nested markdown lists to be removed:**
+
+![Typopo removes nested lists](assets/typopo-removes-nested-lists.gif "Typopo removes nested lists")
+
+
+
+
+
 ## 1.0.3 // 2020-11-01
 ### Updates
 - Bump Typopo package to its latest version ([2.3.7](https://github.com/surfinzap/typopo/releases/tag/2%2F3%2F7))

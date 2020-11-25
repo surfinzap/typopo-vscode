@@ -21,29 +21,32 @@ Write neat notes without bothering about all the typography rules.
 
 ## Contents
 - [Typopo extension for VS Code](#typopo-extension-for-vs-code)
-	- [Fix typos in code](#fix-typos-in-code)
-	- [Fix typos in Markdown notes](#fix-typos-in-markdown-notes)
-	- [Contents](#contents)
-	- [Use](#use)
-	- [Settings](#settings)
-	- [Features](#features)
-	- [Further use](#further-use)
-	- [News & Releases](#news-releases)
-	- [Support](#support)
-	- [Feedback](#feedback)
-	- [License](#license)
+  - [Fix typos in code](#fix-typos-in-code)
+  - [Fix typos in Markdown notes](#fix-typos-in-markdown-notes)
+  - [Contents](#contents)
+  - [Use](#use)
+  - [Settings](#settings)
+  - [Features](#features)
+  - [Further use](#further-use)
+  - [News & Releases](#news-releases)
+  - [Support](#support)
+  - [Feedback](#feedback)
+  - [License](#license)
 
 ## Use 
 1. Select text you wish to fix
 2. Fix it, either by `Typopo: Fix Typos` via menu or via `Ctrl+Alt+T` (Win) or `Ctrl+Cmd+T` (Mac).
 
 ## Settings
-You can set a default language and choose whether you wish to keep or remove empty lines. You can fix microtypography for:
-- English,
-- German,
-- Rusyn,
-- Czech,
-- Slovak texts. 
+You can set:
+- a default language for typography rules:
+  - English
+  - German
+  - Rusyn
+  - Czech
+  - Slovak
+- choose to keep/remove empty lines
+- choose to keep/remove whitespaces before a nested Markdown list
 
 ![Typopo Settings in VS Code](assets/typopo--vs-code-settings.png "Typopo Settings in VS Code")
 
