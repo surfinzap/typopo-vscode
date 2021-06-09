@@ -1,4 +1,18 @@
-# Change Log for Typopo VS Code extension
+# Changelog for Typopo VS Code extension
+
+## 1.2.0 // 2021-06-09
+
+### ✨ New features
+New configuration option to keep Markdown code blocks in your Markdown files:
+- `keepMarkdownCodeBlocks: true` when you want to keep Markdown code blocks in your Markdown files
+- `keepMarkdownCodeBlocks: false` want to fix grave accents (`) in generic texts to single quotes 
+
+
+### 📦️ Updates
+- Bump Typopo package to its latest version ([2.5.0](https://github.com/surfinzap/typopo/releases/tag/2%2F5%2F0))
+
+
+
 
 ## 1.1.0 // 2020-11-25
 ### New features

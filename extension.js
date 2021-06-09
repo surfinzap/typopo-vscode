@@ -29,6 +29,7 @@ function activate(context) {
 				language = extensionConfig.get('language');
         config.removeLines = extensionConfig.get('removeLines');
         config.removeWhitespacesBeforeMarkdownList = extensionConfig.get('removeWhitespacesBeforeMarkdownList');
+        config.keepMarkdownCodeBlocks = extensionConfig.get('keepMarkdownCodeBlocks');
 				
 				const fixedText = typopo.fixTypos(text, language, config)
 				editor.edit(editBuilder => {
