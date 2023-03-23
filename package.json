@@ -11,6 +11,9 @@
 	"categories": [
 		"Other"
 	],
+  "sponsor": {
+    "url": "https://ko-fi.com/branosandala"
+  },
 	"keywords": [
 		"typopo-vscode",
 		"microtypography",
