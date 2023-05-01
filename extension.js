@@ -21,9 +21,19 @@ function activate(context) {
 			
 			if (editor) {
 				const document = editor.document;
-				const selection = editor.selection;
-				const text = document.getText(selection);
+				const position = editor.selection.active;
+
+				let selection = editor.selection;
+				let text = document.getText(selection);
+
+				// if no text is selected, then select the line
+				if (text == '') {
+					let lineRange = editor.document.lineAt(position).range;
+					selection = new vscode.Selection(lineRange.start, lineRange.end);
+					text = document.getText(selection)				
+				}
 				
+				// check for user config
 				const extensionConfig = vscode.workspace.getConfiguration('typopo');
 				
 				language = extensionConfig.get('language');
@@ -40,7 +50,7 @@ function activate(context) {
 	);
 }
 
-exports.activate = activate;
+
 
 // this method is called when your extension is deactivated
 function deactivate() {}
