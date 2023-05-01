@@ -3,6 +3,9 @@
 
 ## 1.3.0 // 2023-05-01
 
+### ✨ New features
+- When no text is selected and you run `fixTypos`, the typos get fixed for the current line.
+
 ### 📦️ Updates
 - Bump devDependencies to their latest versions
 
