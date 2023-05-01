@@ -6,7 +6,7 @@
 	"publisher": "brano",
 	"icon": "assets/typopo--logotype--128.png",
 	"engines": {
-		"vscode": "^1.69.0"
+		"vscode": "^1.77.3"
 	},
 	"categories": [
 		"Other"
@@ -26,9 +26,6 @@
 		"Czech",
 		"Rusyn",
 		"keybindings"
-	],
-	"activationEvents": [
-		"onCommand:typopo-vscode.fixTypos"
 	],
 	"repository": {
 		"type": "git",
