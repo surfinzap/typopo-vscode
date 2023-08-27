@@ -6,7 +6,7 @@
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
-    "vscode": "^1.77.3"
+    "vscode": "^1.81.1"
   },
   "categories": [
     "Other"
