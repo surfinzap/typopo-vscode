@@ -92,8 +92,7 @@
     }
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "node ./test/runTest.js"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
@@ -103,8 +102,7 @@
     "eslint": "^8.39.0",
     "glob": "^10.2.2",
     "mocha": "^10.2.0",
-    "typescript": "^5.0.4",
-    "vscode-test": "^1.6.1"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
     "typopo": "^2.5.5"
