@@ -5,6 +5,7 @@
 
 ### 📦️ Updates
 - Bump Typopo package to its latest version ([2.5.5](https://github.com/surfinzap/typopo/releases/tag/2%2F5%2F5))
+- Bump devDependencies to their latest versions
 
 
 

@@ -98,11 +98,11 @@
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.16.3",
-    "@types/vscode": "^1.77.0",
-    "eslint": "^8.39.0",
-    "glob": "^10.2.2",
+    "@types/vscode": "^1.81.0",
+    "eslint": "^8.48.0",
+    "glob": "^10.3.3",
     "mocha": "^10.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "typopo": "^2.5.5"
