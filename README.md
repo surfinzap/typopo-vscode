@@ -38,8 +38,8 @@ Write neat notes without bothering about all the typography rules.
 2. Fix it, either by `Typopo: Fix Typos` via the menu or `Ctrl+Alt+T` (Win) or `Ctrl+Cmd+T` (Mac).
 
 ## Settings
-You can set:
-- a default language for typography rules:
+You can:
+- set a default language for typography rules:
   - English
   - German
   - Rusyn
@@ -52,7 +52,7 @@ You can set:
 
 
 ## Features
-Typopo fixes microtypography hickups in five languages:
+Typopo fixes microtypography hiccups in five languages:
 - English
 - German
 - Czech
@@ -60,7 +60,7 @@ Typopo fixes microtypography hickups in five languages:
 - Rusyn
 
 Typopo fixes punctuation:
-- double quotes (and accidentally-typed punctuation related to the use of double quotes)
+- double quotes (and accidentally typed punctuation related to the use of double quotes)
 - double primes
 - single quotes (with an assumption they are used as [secondary](https://en.wikipedia.org/wiki/Quotation_mark#Summary_table_for_various_languages) and in pairs)
 - single primes
@@ -76,7 +76,7 @@ Typopo fixes whitespace characters:
 - removes extra white spaces
 	- at the beginning and the end of sentences (leading and trailing spaces)
 	- between words and paragraphs
-	- before or after a punctuation (where applicable)
+	- before or after punctuation (where applicable)
 	- around an ellipsis and an aposiopesis (where applicable)
 	- between a number sign (#) and a number
 	- before ordinal indicators (e.g. 1 st → 1st)
@@ -89,14 +89,15 @@ Typopo fixes whitespace characters:
 		- after “&”
 		- after cardinal numbers
 		- after ordinal numbers
-		- ordinal Roman numerals
-		- after name initials (i.e. Philip K. Dick)
+		- after ordinal Roman numerals
+		- before single capital letters that are part of the phrase (e.g. Project X)
+		- after name initials (e.g. Philip K. Dick)
 		- after common single-word and multiple-word abbreviations
-		- before % (percent), ‰ (per mille), ‱ (permyriad)
+		- before % (percent), ‰ (per mille), ‱ (per myriad)
 
 Typopo fixes words:
 - accidental uPPERCASE
-- spelling of e.g., i.e., a.m. and p.m.
+- the spelling of e.g., i.e., a.m. and p.m.
 - ISSN and ISBN formatting
 
 Typopo fixes symbols:
