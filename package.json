@@ -89,17 +89,10 @@
     }
   },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint extension.js"
   },
   "devDependencies": {
-    "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^20.10.5",
-    "@types/vscode": "^1.85.0",
-    "eslint": "^8.56.0",
-    "glob": "^10.3.10",
-    "mocha": "^10.2.0",
-    "typescript": "^5.3.3"
+    "eslint": "^9.10.0"
   },
   "dependencies": {
     "typopo": "^2.5.7"
