@@ -21,7 +21,7 @@ jobs:
             ~/.npm
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
-      - run: npm ci
+      - run: npm install
 
       - name: deploy to vscode marketplace
         env:

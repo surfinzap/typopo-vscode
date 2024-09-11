@@ -1,6 +1,14 @@
 # Changelog for Typopo VS Code extension
 
 
+
+## 1.3.3 // 2024-09-11
+### 📦️ Updates
+- Bump Typopo package to its latest version ([2.5.7](https://github.com/surfinzap/typopo/releases/tag/2%2F5%2F7))
+- Bump devDependencies to their latest versions
+
+
+
 ## 1.3.2 // 2023-12-23
 ### 📦️ Updates
 - Bump Typopo package to its latest version ([2.5.6](https://github.com/surfinzap/typopo/releases/tag/2%2F5%2F6))
