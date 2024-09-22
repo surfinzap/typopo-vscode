@@ -5,3 +5,8 @@ test/**
 **/jsconfig.json
 **/*.map
 **/.eslintrc.json
+eslint.config.mjs
+package.json
+pnpm-lock.yaml
+.github/
+
