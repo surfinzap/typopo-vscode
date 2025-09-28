@@ -1,6 +1,15 @@
 # Changelog for Typopo VS Code extension
 
 
+## 1.4.0 // 2025-09-25
+
+### ✨ New features
+- Add support for multi-cursor and multi-selection editing—fix typos across multiple text selections simultaneously
+
+### 📦️ Updates
+- Bump Typopo package to its latest version ([2.7.0](https://github.com/surfinzap/typopo/releases/tag/2.7.0))
+- Bump devDependencies to their latest versions
+
 ## 1.3.5 // 2025-09-08
 ### 📦️ Updates
 - Bump Typopo package to its latest version ([2.6.0](https://github.com/surfinzap/typopo/releases/tag/2.6.0))
