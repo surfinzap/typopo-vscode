@@ -95,9 +95,9 @@
     "lint": "eslint extension.js"
   },
   "devDependencies": {
-    "eslint": "^9.35.0"
+    "eslint": "^9.36.0"
   },
   "dependencies": {
-    "typopo": "^2.6.0"
+    "typopo": "^2.7.0"
   }
 }
