@@ -2,6 +2,12 @@
 
 
 
+## 1.4.2 // 2025-10-05
+
+### 📦️ Updates
+- Add auto-publishing of the extension to [Open VSX Registry](https://open-vsx.org/extension/brano/typopo-vscode)  
+
+
 ## 1.4.1 // 2025-10-04
 
 ### 📦️ Updates
