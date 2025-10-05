@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: deploy
+name: Publish extension
 
 on:
   release:
@@ -18,8 +18,13 @@ jobs:
 
       - run: npm install
 
-      - name: deploy to vscode marketplace
+      - name: Publish to Visual Studio Marketplace
         env:
           VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
         run: |
           npx vsce publish -p $VSCE_TOKEN
+
+      - name: Publish to Open VSX Registry
+        uses: HaaLeo/publish-vscode-extension@v2
+        with:
+          pat: ${{ secrets.OPEN_VSX_TOKEN }}
