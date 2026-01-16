@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       typopo:
-        specifier: ^2.9.0
-        version: 2.9.0
+        specifier: ^2.9.1
+        version: 2.9.1
     devDependencies:
       eslint:
         specifier: ^9.39.2
@@ -335,8 +335,8 @@ packages:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
 
-  typopo@2.9.0:
-    resolution: {integrity: sha512-vDbtFVK1T2mjnaMkhiG2XsH1mP7XI7BBCPzZ2zvlxwxq0VlMRf/N91D7uBUb93VYGDuWfvs/CFExIrhykLQ+SA==}
+  typopo@2.9.1:
+    resolution: {integrity: sha512-DcPC5F1B6NMgYPfpQd8qxY4pbjJF3Gn5Q+1VnksHEsOZB1V1ObyvxsY1sdQLWgRypUmGMwRSldcr68tooGGAfw==}
     engines: {node: '>=6.9.4'}
 
   uri-js@4.4.1:
@@ -666,7 +666,7 @@ snapshots:
     dependencies:
       prelude-ls: 1.2.1
 
-  typopo@2.9.0: {}
+  typopo@2.9.1: {}
 
   uri-js@4.4.1:
     dependencies:

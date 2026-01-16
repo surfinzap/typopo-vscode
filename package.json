@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -98,6 +98,6 @@
     "eslint": "^9.39.2"
   },
   "dependencies": {
-    "typopo": "^2.9.0"
+    "typopo": "^2.9.1"
   }
 }
