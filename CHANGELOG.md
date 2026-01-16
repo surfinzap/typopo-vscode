@@ -1,6 +1,14 @@
 # Changelog for Typopo VS Code extension
 
 
+
+## 1.5.0 // 
+
+### 🔨 Maintenance
+- Rewrite extension to typescript
+
+
+
 ## 1.4.5 // 2026-01-16
 
 ### 📦️ Updates

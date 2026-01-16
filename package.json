@@ -34,7 +34,7 @@
   "activationEvents": [
     "onCommand:typopo-vscode.fixTypos"
   ],
-  "main": "./extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -92,10 +92,18 @@
     }
   },
   "scripts": {
-    "lint": "eslint extension.js"
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
-    "eslint": "^9.39.2"
+    "@types/node": "^25.0.9",
+    "@types/vscode": "^1.108.1",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "typopo": "^2.9.1"
