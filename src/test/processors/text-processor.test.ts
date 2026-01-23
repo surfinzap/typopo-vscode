@@ -6,20 +6,19 @@ const defaultConfig: TypopoConfig = {
 	removeLines: false,
 };
 
-// Sample assertions, Typopo is thoroughly tested
+export const textProcessorTestSet: Record<string, string> = {
+	'"hello"': "“hello”",
+	"\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
+	"Sentence ending….....": "Sentence ending…",
+	"100 µm3": "100 µm³",
+	"4X object": "4× object",
+};
+
 describe('RawTextProcessor / Assertion Tests', () => {
 	const processor = new RawTextProcessor();
 
 	describe('Quote conversion (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-      '"hello"': "“hello”",
-      "\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
-      "Sentence ending….....": "Sentence ending…",
-      "100 µm3": "100 µm³",
-      "4X object": "4× object",
-    };
-
-		for (const [input, expected] of Object.entries(testCases)) {
+		for (const [input, expected] of Object.entries(textProcessorTestSet)) {
 			it(`should convert: ${input}`, () => {
 				const replacements = processor.process(input, 'en-us', defaultConfig);
 				const result = applyReplacements(input, replacements);
