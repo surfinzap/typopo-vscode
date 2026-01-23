@@ -6,7 +6,7 @@
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
-    "vscode": "^1.104.0"
+    "vscode": "^1.108.1"
   },
   "categories": [
     "Other"
@@ -31,7 +31,6 @@
     "type": "git",
     "url": "https://github.com/surfinzap/typopo-vscode.git"
   },
-
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -79,7 +78,7 @@
         "typopo.keepMarkdownFormatting": {
           "type": "boolean",
           "default": true,
-          "description": "Preserve markdown formatting (code blocks, MDC components, tables, etc.) when fixing typography in .md/.mdx/.mdc files. Disable to use legacy raw text processing."
+          "description": "Preserve markdown formatting (code blocks, tables, etc.)"
         }
       }
     }

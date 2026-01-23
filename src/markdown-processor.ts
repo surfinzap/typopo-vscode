@@ -6,12 +6,7 @@ import { visit, SKIP } from 'unist-util-visit';
 import * as typopo from 'typopo';
 import { MdastNode } from './types/remark';
 import { detectMDCRegions, isInMDCRegion } from './mdc-detector';
-
-export interface TextReplacement {
-	offset: number;
-	length: number;
-	newText: string;
-}
+import type { TextReplacement, TypopoConfig } from './processors/text-processor';
 
 const PROCESSABLE_NODES = new Set([
 	'paragraph',
@@ -37,7 +32,7 @@ const SKIP_NODES = new Set([
 export function processMarkdownText(
 	documentText: string,
 	language: string,
-	typopoConfig: { removeLines: boolean }
+	typopoConfig: TypopoConfig
 ): TextReplacement[] {
 	const replacements: TextReplacement[] = [];
 
