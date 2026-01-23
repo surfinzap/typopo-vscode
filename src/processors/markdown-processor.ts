@@ -4,8 +4,8 @@ import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import { visit, SKIP } from 'unist-util-visit';
 import * as typopo from 'typopo';
-import { MdastNode } from './types/remark';
-import type { TextReplacement, TypopoConfig } from './processors/text-processor';
+import { MdastNode } from '../types/remark';
+import type { TextReplacement, TypopoConfig } from './text-processor';
 
 const PROCESSABLE_NODES = new Set([
 	'paragraph',

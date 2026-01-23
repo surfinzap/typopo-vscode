@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { TextReplacement } from './processors/text-processor';
-import { applyReplacements } from './markdown-processor';
+import { applyReplacements } from './processors/markdown-processor';
 
 /**
  * Convert VS Code Position to byte offset in the document

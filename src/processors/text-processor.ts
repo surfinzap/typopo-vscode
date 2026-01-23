@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as typopo from 'typopo';
-import { processMarkdownText } from '../markdown-processor';
+import { processMarkdownText } from './markdown-processor';
 
 export interface TextReplacement {
 	offset: number;
