@@ -71,12 +71,8 @@ function activate(context) {
             return;
         }
         try {
-            // Get full document text
-            const documentText = document.getText();
-            // Process text and get replacements
-            const replacements = processor.process(documentText, language, config);
-            // Apply replacements to all selections
-            (0, selection_helper_1.applyReplacementsToSelections)(editor, document, replacements);
+            // Process and apply each selection independently
+            (0, selection_helper_1.processAndApplySelections)(editor, document, processor, language, config);
         }
         catch (error) {
             console.error('Text processing failed:', error);

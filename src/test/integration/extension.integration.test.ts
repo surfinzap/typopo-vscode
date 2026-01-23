@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
-import { rawTextProcessorTestSet } from './processors/text-processor.test';
+import { rawTextProcessorTestSet } from '../unit/processors/text-processor.test';
 
 // Mock the vscode module before importing it
 // Note: vi.mock is hoisted, so we must define the mock inline
@@ -36,7 +36,7 @@ vi.mock('vscode', () => ({
 }));
 
 import * as vscode from 'vscode';
-import { activate } from '../extension';
+import { activate } from '../../extension';
 
 // ============================================================================
 // Mock Factory Functions

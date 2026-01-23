@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { RawTextProcessor, TypopoConfig } from '../../processors/text-processor';
-import { applyReplacements, TextReplacement } from '../../processors/text-processor';
+import { RawTextProcessor, TypopoConfig } from '../../../processors/text-processor';
+import { applyReplacements, TextReplacement } from '../../../processors/text-processor';
 
 const defaultConfig: TypopoConfig = {
 	removeLines: false,
