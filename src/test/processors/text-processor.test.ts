@@ -6,7 +6,7 @@ const defaultConfig: TypopoConfig = {
 	removeLines: false,
 };
 
-export const textProcessorTestSet: Record<string, string> = {
+export const rawTextProcessorTestSet: Record<string, string> = {
 	'"hello"': "“hello”",
 	"\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
 	"Sentence ending….....": "Sentence ending…",
@@ -18,7 +18,7 @@ describe('RawTextProcessor / Assertion Tests', () => {
 	const processor = new RawTextProcessor();
 
 	describe('Quote conversion (SHOULD change)', () => {
-		for (const [input, expected] of Object.entries(textProcessorTestSet)) {
+		for (const [input, expected] of Object.entries(rawTextProcessorTestSet)) {
 			it(`should convert: ${input}`, () => {
 				const replacements = processor.process(input, 'en-us', defaultConfig);
 				const result = applyReplacements(input, replacements);

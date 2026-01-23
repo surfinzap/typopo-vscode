@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { TypopoConfig, TextProcessor, MarkdownProcessor, RawTextProcessor } from './processors/text-processor';
-import { applyReplacementsToSelections } from './selection-helper';
+import { processAndApplySelections } from './selection-helper';
 
 export function activate(context: vscode.ExtensionContext): void {
 	// Initialize processors - order matters! First match wins.
@@ -43,14 +43,8 @@ export function activate(context: vscode.ExtensionContext): void {
 			}
 
 			try {
-				// Get full document text
-				const documentText = document.getText();
-
-				// Process text and get replacements
-				const replacements = processor.process(documentText, language, config);
-
-				// Apply replacements to all selections
-				applyReplacementsToSelections(editor, document, replacements);
+				// Process and apply each selection independently
+				processAndApplySelections(editor, document, processor, language, config);
 
 			} catch (error) {
 				console.error('Text processing failed:', error);
