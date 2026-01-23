@@ -231,15 +231,12 @@ describe('applyReplacements', () => {
 		it('should handle identical offsets (order dependent)', () => {
 			const text = 'abcdefghij';
 			const replacements: TextReplacement[] = [
+				{ offset: 2, length: 4, newText: 'YYYY' },
 				{ offset: 2, length: 3, newText: 'XXX' },
-				{ offset: 2, length: 4, newText: 'YYYY' }
 			];
 
-			// Both have offset 2 - sort is stable, so order matters
-			// This documents current behavior, not necessarily desired behavior
 			const result = applyReplacements(text, replacements);
-			// The exact result depends on stable sort
-			expect(typeof result).toBe('string');
+			expect(result).toBe('abXXXYghij');
 		});
 	});
 });

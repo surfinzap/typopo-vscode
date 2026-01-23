@@ -1,7 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`applyReplacements > Snapshot tests > should handle complex multi-line text with many replacements 1`] = `
-"Line 1 with "quotes" here.
-Line 2 with "more quotes" and ellipsis.…Line 3 with ranges lik2020–202121.
-Line 4 with "f"final quotes"nd dash--h—e."
-`;
