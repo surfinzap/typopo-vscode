@@ -98,10 +98,10 @@
     "@types/vscode": "^1.108.1",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
-    "@vitest/ui": "^3.0.0",
+    "@vitest/ui": "^4.0.18",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
-    "vitest": "^3.0.0"
+    "vitest": "^4.0.18"
   },
   "dependencies": {
     "typopo": "^2.9.1",
