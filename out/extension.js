@@ -35,40 +35,52 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 const vscode = __importStar(require("vscode"));
-const typopo = __importStar(require("typopo"));
-let language = 'en-us';
-let config = {
-    removeLines: false,
-};
+const text_processor_1 = require("./processors/text-processor");
+const selection_helper_1 = require("./selection-helper");
 function activate(context) {
+    // Initialize processors - order matters! First match wins.
+    // Add new processors (HTML, JavaScript, etc.) to this array in the future
+    const processors = [
+        new text_processor_1.MarkdownProcessor(),
+        new text_processor_1.RawTextProcessor() // Fallback - always matches, should be last
+    ];
     context.subscriptions.push(vscode.commands.registerCommand('typopo-vscode.fixTypos', function () {
-        // get the active text editor
+        // Get the active text editor
         const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const document = editor.document;
-            // check for user config
-            const extensionConfig = vscode.workspace.getConfiguration('typopo');
-            language = extensionConfig.get('language') || 'en-us';
-            config.removeLines = extensionConfig.get('removeLines') || false;
-            config.removeWhitespacesBeforeMarkdownList = extensionConfig.get('removeWhitespacesBeforeMarkdownList');
-            config.keepMarkdownCodeBlocks = extensionConfig.get('keepMarkdownCodeBlocks');
-            editor.edit(editBuilder => {
-                editor.selections.forEach(selection => {
-                    let text = document.getText(selection);
-                    // if no text is selected, then select the line
-                    if (text === '') {
-                        const position = selection.active;
-                        let lineRange = editor.document.lineAt(position).range;
-                        selection = new vscode.Selection(lineRange.start, lineRange.end);
-                        text = document.getText(selection);
-                    }
-                    const fixedText = typopo.fixTypos(text, language, config);
-                    editBuilder.replace(selection, fixedText);
-                });
-            });
+        if (!editor) {
+            return;
+        }
+        const document = editor.document;
+        // Load user configuration
+        const extensionConfig = vscode.workspace.getConfiguration('typopo');
+        const language = extensionConfig.get('language') || 'en-us';
+        const config = {
+            removeLines: extensionConfig.get('removeLines') || false,
+        };
+        // Pass config with markdown-specific settings for processor selection
+        const processorConfig = {
+            ...config,
+            keepMarkdownFormatting: extensionConfig.get('keepMarkdownFormatting') ?? true
+        };
+        // Find the first processor that should handle this document
+        const processor = processors.find(p => p.shouldProcess(document, processorConfig));
+        if (!processor) {
+            // This should never happen since RawTextProcessor always matches
+            console.error('No processor found for document');
+            return;
+        }
+        try {
+            // Get full document text
+            const documentText = document.getText();
+            // Process text and get replacements
+            const replacements = processor.process(documentText, language, config);
+            // Apply replacements to all selections
+            (0, selection_helper_1.applyReplacementsToSelections)(editor, document, replacements);
+        }
+        catch (error) {
+            console.error('Text processing failed:', error);
+            vscode.window.showErrorMessage(`Typopo: Processing failed - ${error}`);
         }
     }));
 }

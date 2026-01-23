@@ -1,0 +1,49 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RawTextProcessor - Snapshot Tests > should handle long text with many replacements 1`] = `
+[
+  {
+    "length": 271,
+    "newText": "Lorem ipsum “dolor” sit amet, consectetur “adipiscing” elit.
+Sed do “eiusmod” tempor incididunt ut “labore” et dolore magna aliqua.
+Ut enim ad “minim” veniam, quis nostrud exercitation…
+With ranges like 2020–2021 and 100–200 pages.
+And em dashes--like this--everywhere.",
+    "offset": 0,
+  },
+]
+`;
+
+exports[`RawTextProcessor - Snapshot Tests > should process complex text with multiple typography issues 1`] = `
+[
+  {
+    "length": 201,
+    "newText": "This is a “test” with multiple issues…
+
+Including “quotes”, ellipsis…, and dashes--like this.
+
+More “text” with ’single quotes’ and numbers like 2020–2021.
+
+“Nested ‘quotes’ here” and—em dashes.",
+    "offset": 0,
+  },
+]
+`;
+
+exports[`RawTextProcessor - Snapshot Tests > should process text that looks like markdown 1`] = `
+[
+  {
+    "length": 135,
+    "newText": "# This “heading” gets processed
+
+’’’
+“code” gets processed too
+’’’
+
+| “table” | “data” |
+|---------|--------|
+| “all” | “processed” |",
+    "offset": 0,
+  },
+]
+`;
