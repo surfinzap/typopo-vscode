@@ -37,8 +37,7 @@ export class MarkdownProcessor implements TextProcessor {
 	shouldProcess(document: vscode.TextDocument, config: any): boolean {
 		const isMarkdownFile =
 			document.languageId === 'markdown' ||
-			document.languageId === 'mdx' ||
-			document.languageId === 'mdc';
+			document.languageId === 'mdx';
 
 		return isMarkdownFile && (config.keepMarkdownFormatting ?? true);
 	}

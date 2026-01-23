@@ -5,7 +5,6 @@ import remarkFrontmatter from 'remark-frontmatter';
 import { visit, SKIP } from 'unist-util-visit';
 import * as typopo from 'typopo';
 import { MdastNode } from './types/remark';
-import { detectMDCRegions, isInMDCRegion } from './mdc-detector';
 import type { TextReplacement, TypopoConfig } from './processors/text-processor';
 
 const PROCESSABLE_NODES = new Set([
@@ -37,9 +36,6 @@ export function processMarkdownText(
 	const replacements: TextReplacement[] = [];
 
 	try {
-		// Detect MDC regions before parsing
-		const mdcRegions = detectMDCRegions(documentText);
-
 		// Parse markdown with full position information
 		const processor = unified()
 			.use(remarkParse)
@@ -57,12 +53,6 @@ export function processMarkdownText(
 
 			// Skip explicitly excluded node types
 			if (SKIP_NODES.has(node.type)) {
-				return SKIP;
-			}
-
-			// Skip nodes in MDC regions
-			const nodeStartOffset = node.position.start.offset;
-			if (isInMDCRegion(nodeStartOffset, mdcRegions)) {
 				return SKIP;
 			}
 
