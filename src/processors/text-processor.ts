@@ -9,7 +9,7 @@ import { processMarkdownText } from './markdown-processor';
 export interface TextReplacement {
 	/** The zero-based character offset where the replacement starts */
 	offset: number;
-	/** The number of characters to replace */
+	/** The number of characters to replace, the original length */
 	length: number;
 	/** The new text to insert at the specified position */
 	newText: string;
