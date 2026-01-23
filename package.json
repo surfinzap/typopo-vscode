@@ -75,16 +75,6 @@
           "type": "boolean",
           "default": false,
           "description": "Remove empty lines between paragraphs"
-        },
-        "typopo.removeWhitespacesBeforeMarkdownList": {
-          "type": "boolean",
-          "default": false,
-          "description": "Remove whitespaces before a nested Markdown list"
-        },
-        "typopo.keepMarkdownCodeBlocks": {
-          "type": "boolean",
-          "default": true,
-          "description": "Keep Markdown `code blocks` in your Markdown files"
         }
       }
     }

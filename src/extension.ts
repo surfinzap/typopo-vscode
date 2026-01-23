@@ -1,12 +1,8 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as typopo from 'typopo';
 
 interface TypopoConfig {
 	removeLines: boolean;
-	removeWhitespacesBeforeMarkdownList?: boolean;
-	keepMarkdownCodeBlocks?: boolean;
 }
 
 let language = 'en-us';
@@ -28,9 +24,6 @@ export function activate(context: vscode.ExtensionContext): void {
 
 				language = extensionConfig.get<string>('language') || 'en-us';
 				config.removeLines = extensionConfig.get<boolean>('removeLines') || false;
-				config.removeWhitespacesBeforeMarkdownList = extensionConfig.get<boolean>('removeWhitespacesBeforeMarkdownList');
-				config.keepMarkdownCodeBlocks = extensionConfig.get<boolean>('keepMarkdownCodeBlocks');
-
 
 				editor.edit(editBuilder => {
 					editor.selections.forEach(selection => {
