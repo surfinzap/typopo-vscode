@@ -6,21 +6,17 @@ const defaultConfig: TypopoConfig = {
 	removeLines: false,
 };
 
-describe('RawTextProcessor - Assertion Tests (Key:Value Format)', () => {
+// Sample assertions, Typopo is thoroughly tested
+describe('RawTextProcessor / Assertion Tests', () => {
 	const processor = new RawTextProcessor();
 
-	/**
-	 * Test cases in key:value format
-	 * Key = input text
-	 * Value = expected output text after typopo processing
-	 *
-	 * RawTextProcessor applies typopo to entire text without structure awareness
-	 */
 	describe('Quote conversion (SHOULD change)', () => {
 		const testCases: Record<string, string> = {
-      // Basic quote conversion
       '"hello"': "“hello”",
       "\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
+      "Sentence ending….....": "Sentence ending…",
+      "100 µm3": "100 µm³",
+      "4X object": "4× object",
     };
 
 		for (const [input, expected] of Object.entries(testCases)) {
@@ -31,30 +27,10 @@ describe('RawTextProcessor - Assertion Tests (Key:Value Format)', () => {
 			});
 		}
 	});
-
-
-
-	describe('Empty and whitespace handling', () => {
-		it('should handle empty string', () => {
-			const replacements = processor.process('', 'en-us', defaultConfig);
-			expect(replacements).toEqual([]);
-		});
-
-		it('should handle only whitespace', () => {
-			const replacements = processor.process('   \n\n   ', 'en-us', defaultConfig);
-			// Typopo might or might not make changes, just verify it doesn't crash
-			expect(Array.isArray(replacements)).toBe(true);
-		});
-
-		it('should handle single character', () => {
-			const replacements = processor.process('a', 'en-us', defaultConfig);
-			expect(Array.isArray(replacements)).toBe(true);
-		});
-	});
 });
 
 
-describe('RawTextProcessor - shouldProcess', () => {
+describe('RawTextProcessor.shouldProcess', () => {
 	const processor = new RawTextProcessor();
 
 	it('should always return true (fallback processor)', () => {
