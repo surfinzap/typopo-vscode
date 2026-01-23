@@ -80,18 +80,3 @@ export function processMarkdownText(
 
 	return replacements;
 }
-
-export function applyReplacements(
-	originalText: string,
-	replacements: TextReplacement[]
-): string {
-	// Sort by offset descending (apply from end to start to preserve offsets)
-	const sorted = [...replacements].sort((a, b) => b.offset - a.offset);
-
-	let result = originalText;
-	for (const { offset, length, newText } of sorted) {
-		result = result.substring(0, offset) + newText + result.substring(offset + length);
-	}
-
-	return result;
-}

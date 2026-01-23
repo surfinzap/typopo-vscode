@@ -3,6 +3,7 @@ node_modules
 *.vsix
 out/
 temp/
+coverage/
 CLAUDE.md
-.claude 
+.claude
 

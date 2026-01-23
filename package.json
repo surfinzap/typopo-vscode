@@ -86,24 +86,29 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
     "@types/node": "^25.0.10",
-    "@types/unist": "^3.0.2",
+    "@types/unist": "^3.0.3",
     "@types/vscode": "^1.108.1",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
+    "@vitest/ui": "^3.0.0",
     "eslint": "^9.39.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^3.0.0"
   },
   "dependencies": {
     "typopo": "^2.9.1",
-    "unified": "^11.0.4",
+    "unified": "^11.0.5",
     "remark-parse": "^11.0.0",
-    "remark-gfm": "^4.0.0",
+    "remark-gfm": "^4.0.1",
     "remark-frontmatter": "^5.0.0",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.1.0"
   }
 }
