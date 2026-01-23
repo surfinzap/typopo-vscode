@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { processMarkdownText } from '../../processors/markdown-processor';
-import { applyReplacements } from '../../processors/text-utils';
-import { TypopoConfig } from '../../processors/text-processor';
+import { TypopoConfig, applyReplacements } from '../../processors/text-processor';
 
 const defaultConfig: TypopoConfig = {
 	removeLines: false,

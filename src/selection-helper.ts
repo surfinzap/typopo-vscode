@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
-import { TextReplacement } from './processors/text-processor';
-import { applyReplacements } from './processors/text-utils';
+import { TextReplacement, applyReplacements } from './processors/text-processor';
 
 /**
  * Convert VS Code Position to byte offset in the document
