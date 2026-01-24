@@ -6,7 +6,7 @@
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
-    "vscode": "^1.108.1"
+    "vscode": "^1.104.0"
   },
   "categories": [
     "Other"
@@ -98,7 +98,7 @@
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.0.10",
     "@types/unist": "^3.0.3",
-    "@types/vscode": "^1.108.1",
+    "@types/vscode": "^1.104.0",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
     "@vitest/ui": "^4.0.18",

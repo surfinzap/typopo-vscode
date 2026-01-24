@@ -15,6 +15,7 @@ async function main() {
 		await runTests({
 			extensionDevelopmentPath,
 			extensionTestsPath,
+			version: '1.104.0', // Test against minimum supported version
 		});
 	} catch (err) {
 		console.error('Failed to run tests:', err);
