@@ -23,7 +23,7 @@ jobs:
       - run: pnpm install
 
       - name: Compile TypeScript
-        run: pnpm run compile
+        run: pnpm run build
 
       - name: Publish to Visual Studio Marketplace
         env:

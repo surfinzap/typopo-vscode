@@ -84,14 +84,14 @@
     }
   },
   "scripts": {
-    "compile": "tsc -p ./",
+    "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "test": "npm run test:unit",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest watch",
     "test:unit:ui": "vitest --ui",
-    "test:integration": "npm run compile && node ./out/test/integration/runIntegrationTests.js",
-    "pretest": "pnpm run compile && pnpm run lint",
+    "test:integration": "npm run build && node ./out/test/integration/runIntegrationTests.js",
+    "pretest": "pnpm run build && pnpm run lint",
     "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
