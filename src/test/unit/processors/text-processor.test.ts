@@ -1,17 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { RawTextProcessor, TypopoConfig } from '../../../processors/text-processor';
 import { applyReplacements, TextReplacement } from '../../../processors/text-processor';
+import { rawTextProcessorTestSet } from '../../fixtures/test-data';
 
 const defaultConfig: TypopoConfig = {
 	removeLines: false,
-};
-
-export const rawTextProcessorTestSet: Record<string, string> = {
-	'"hello"': "“hello”",
-	"\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
-	"Sentence ending….....": "Sentence ending…",
-	"100 µm3": "100 µm³",
-	"4X object": "4× object",
 };
 
 describe('RawTextProcessor / Assertion Tests', () => {

@@ -8,10 +8,10 @@ export function activate(context: vscode.ExtensionContext): void {
 	const processors: TextProcessor[] = [
 		new MarkdownProcessor(),
 		new RawTextProcessor() // Fallback - always matches, should be last
-	];
+	]; 
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('typopo-vscode.fixTypos', function () {
+		vscode.commands.registerCommand('typopo-vscode.fixTypos', async function () {
 			// Get the active text editor
 			const editor = vscode.window.activeTextEditor;
 			if (!editor) {
@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
 			try {
 				// Process and apply each selection independently
-				processAndApplySelections(editor, document, processor, language, config);
+				await processAndApplySelections(editor, document, processor, language, config);
 
 			} catch (error) {
 				console.error('Text processing failed:', error);

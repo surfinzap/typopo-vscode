@@ -18,8 +18,8 @@ export function processAndApplySelections(
 	processor: TextProcessor,
 	language: string,
 	config: TypopoConfig
-): void {
-	editor.edit(editBuilder => {
+): Thenable<boolean> {
+	return editor.edit(editBuilder => {
 		editor.selections.forEach(selection => {
 			// Handle empty selection (expand to current line)
 			let effectiveSelection = selection;

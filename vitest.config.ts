@@ -2,9 +2,9 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
 	test: {
-		// Test file patterns
-		include: ['src/test/**/*.test.ts'],
-		exclude: ['node_modules', 'out', '.vscode-test'],
+		// Test file patterns - only unit tests
+		include: ['src/test/unit/**/*.test.ts'],
+		exclude: ['node_modules', 'out', '.vscode-test', 'src/test/integration/**'],
 
 		// Environment
 		environment: 'node',

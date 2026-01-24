@@ -19,18 +19,19 @@
 			"preLaunchTask": "${defaultBuildTask}"
 		},
 		{
-			"name": "Extension Tests",
-			"type": "extensionHost",
+			"name": "Extension Integration Tests",
+			"type": "node",
 			"request": "launch",
-			"runtimeExecutable": "${execPath}",
-			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}",
-				"--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
-			],
+			"runtimeExecutable": "node",
+			"program": "${workspaceFolder}/out/test/integration/runTest.js",
+			"cwd": "${workspaceFolder}",
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
 			],
-			"preLaunchTask": "${defaultBuildTask}"
+			"preLaunchTask": "${defaultBuildTask}",
+			"env": {
+				"NODE_ENV": "test"
+			}
 		}
 	]
 }

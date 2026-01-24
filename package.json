@@ -86,29 +86,35 @@
   "scripts": {
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "test": "vitest run",
-    "test:watch": "vitest watch",
-    "test:ui": "vitest --ui",
+    "test": "npm run test:unit",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest watch",
+    "test:unit:ui": "vitest --ui",
+    "test:integration": "npm run compile && node ./out/test/integration/runIntegrationTests.js",
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "eslint src/**/*.ts"
   },
   "devDependencies": {
+    "@types/mocha": "^10.0.10",
     "@types/node": "^25.0.10",
     "@types/unist": "^3.0.3",
     "@types/vscode": "^1.108.1",
     "@typescript-eslint/eslint-plugin": "^8.53.1",
     "@typescript-eslint/parser": "^8.53.1",
     "@vitest/ui": "^4.0.18",
+    "@vscode/test-electron": "^2.5.2",
     "eslint": "^9.39.2",
+    "glob": "^13.0.0",
+    "mocha": "^11.7.5",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },
   "dependencies": {
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
     "typopo": "^2.9.1",
     "unified": "^11.0.5",
-    "remark-parse": "^11.0.0",
-    "remark-gfm": "^4.0.1",
-    "remark-frontmatter": "^5.0.0",
     "unist-util-visit": "^5.1.0"
   }
 }
