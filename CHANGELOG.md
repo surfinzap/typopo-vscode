@@ -4,6 +4,16 @@
 
 ## 1.5.0 // 
 
+### ✨ New features
+- tbd write about better support for fixing the text written in markdown. Before the only rudimentary parts as code blocks or list items were identified and skipped 
+- now when typopo fixes the text, it will skip from fixing:
+  - inline code (show example)
+  - code (show example)
+  - raw HTML within markdown (show example)
+  - YAM:/TOML frontmatter 
+- it keeps the nesting for lists and blockquotes 
+if you wish to fix the content within the skipped parts you can only select portion you wish to fix
+
 ### 🔨 Maintenance
 - Rewrite extension to typescript
 

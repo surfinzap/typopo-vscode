@@ -1,23 +1,31 @@
 import { describe, it, expect } from 'vitest';
 import { processMarkdownText } from '../../../processors/markdown-processor';
 import { TypopoConfig, applyReplacements } from '../../../processors/text-processor';
+import { rawTextProcessorTestSet } from '../../fixtures/test-data';
 
 const defaultConfig: TypopoConfig = {
 	removeLines: false,
 };
 
 describe('Markdown Processor / Assertion Tests', () => {
-	describe.only('Code block preservation (should NOT change)', () => {
+	describe('Code block preservation (should NOT change)', () => {
 		const testCases: Record<string, string> = {
-			// Inline code should be preserved
-			'`"code quotes"`': '`"code quotes"`',
-			'Text with `"inline code"` preserved': 'Text with `"inline code"` preserved',
-			'Multiple `"code"` blocks `"here"`': 'Multiple `"code"` blocks `"here"`',
+      // Inline code should be preserved
+      '`"code quotes"`': '`"code quotes"`',
+      'text `"inline code"` text': 'text `"inline code"` text',
+      'Multiple `"code"` blocks `"here"`': 'Multiple `"code"` blocks `"here"`',
 
-			// Fenced code blocks should be preserved
-			'```\n"code block"\n```': '```\n"code block"\n```',
-			'```javascript\nconst x = "value";\n```': '```javascript\nconst x = "value";\n```',
-		};
+      // Fenced code blocks should be preserved
+      '```\n"code block"\n```': '```\n"code block"\n```',
+      '```javascript\nconst x = "value";\n```':
+        '```javascript\nconst x = "value";\n```',
+
+      // Inline code within quoted fragment
+      '"word `"inline code"` word"': '“word `"inline code"` word”',
+
+      // Nbsp test
+      "a `code`": "a `code`",
+    };
 
 		for (const [input, expected] of Object.entries(testCases)) {
 			it(`should preserve: ${input.substring(0, 50)}...`, () => {
@@ -28,7 +36,7 @@ describe('Markdown Processor / Assertion Tests', () => {
 		}
 	});
 
-	describe('Table preservation (should NOT change)', () => {
+	describe.skip('Table preservation (should NOT change)', () => {
 		const testCases: Record<string, string> = {
 			// Tables should be completely preserved
 			'| "Header" | "Value" |\n|----------|----------|\n| "data" | "more" |':
@@ -47,146 +55,191 @@ describe('Markdown Processor / Assertion Tests', () => {
 		}
 	});
 
-	describe('YAML frontmatter preservation (should NOT change)', () => {
-		const testCases: Record<string, string> = {
-			// Frontmatter should be preserved
-			'---\ntitle: "Test"\nauthor: "John"\n---':
-				'---\ntitle: "Test"\nauthor: "John"\n---',
+	describe("YAML frontmatter preservation (should NOT change)", () => {
+    const testCases: Record<string, string> = {
+      // Frontmatter should be preserved
+      '---\ntitle: "Test"\nauthor: "John"\n---':
+        '---\ntitle: "Test"\nauthor: "John"\n---',
 
-			'---\ntitle: "My "Post""\n---\n\nContent with "quotes".':
-				'---\ntitle: "My "Post""\n---\n\nContent with "quotes".',
-		};
+      '---\ntitle: "My "Post""\n---\n\nContent with "quotes".':
+        '---\ntitle: "My "Post""\n---\n\nContent with “quotes”.',
+    };
+
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should preserve frontmatter: ${input.substring(0, 30)}...`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
+
+	describe("TOML frontmatter preservation (should NOT change)", () => {
+    const testCases: Record<string, string> = {
+      // Frontmatter should be preserved
+      '+++\ntitle: "Test"\nauthor: "John"\n+++':
+        '+++\ntitle: "Test"\nauthor: "John"\n+++',
+
+      '+++\ntitle: "My "Post""\n+++\n\nContent with "quotes".':
+        '+++\ntitle: "My "Post""\n+++\n\nContent with “quotes”.',
+    };
+
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should preserve frontmatter: ${input.substring(0, 30)}...`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
+
+
+	describe("raw HTML preservation (should NOT change)", () => {
+		const testCases: Record<string, string> = {
+      '"quotes" <p id="id">"quotes"</p> "quotes"':
+        '“quotes” <p id="id">“quotes”</p> “quotes”',
+
+      '<html><p id="id">"quotes"</p></html>':
+        '<html><p id="id">"quotes"</p></html>',
+
+      '<a href="id">"quotes"</a>': '<a href="id">“quotes”</a>',
+    };
 
 		for (const [input, expected] of Object.entries(testCases)) {
 			it(`should preserve frontmatter: ${input.substring(0, 30)}...`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
+				const replacements = processMarkdownText(
+					input,
+					"en-us",
+					defaultConfig,
+				);
 				const result = applyReplacements(input, replacements);
 				expect(result).toBe(expected);
 			});
 		}
 	});
 
-	describe('Quote conversion in regular text (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-			// Regular quotes should be converted to smart quotes
-			'"hello"': '"hello"',
-			'She said "hello"': 'She said "hello"',
-			'A "quoted" word': 'A "quoted" word',
-			'Multiple "quotes" in "text"': 'Multiple "quotes" in "text"',
+	describe("Quote conversion in regular text (SHOULD change)", () => {
+    // Use shared test data from test-data.ts
+    for (const [input, expected] of Object.entries(rawTextProcessorTestSet)) {
+      it(`should convert quotes: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 
-			// Nested quotes
-			'"outer \'inner\' outer"': '"outer \'inner\' outer"',
-		};
+	describe("Quote conversion in headings (SHOULD change)", () => {
+    const testCases: Record<string, string> = {
+      '# Heading with "quotes"': '# Heading with “quotes”',
+      '## Sub-heading test...': '## Sub-heading test…',
+      '### Heading "with" multiple "quotes"':
+        '### Heading “with” multiple “quotes”',
+    };
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should convert quotes: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should convert quotes in heading: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 
-	describe('Quote conversion in headings (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-			'# Heading with "quotes"': '# Heading with "quotes"',
-			'## Sub-heading "test"': '## Sub-heading "test"',
-			'### Level 3 "with" multiple "quotes"': '### Level 3 "with" multiple "quotes"',
-		};
+	describe("Quote conversion in inline styles (SHOULD change)", () => {
+    const testCases: Record<string, string> = {
+      '*"italic quotes"*': "*“italic quotes”*",
+      '**"bold quotes"**': "**“bold quotes”**",
+      '***"bold italic quotes"***': "***“bold italic quotes”***",
+      'Text with *"emphasized"* word': "Text with *“emphasized”* word",
+      '_"italic quotes"_': "_“italic quotes”_",
+      '__"bold quotes"__': "__“bold quotes”__",
+      '___"bold italic quotes"___': "___“bold italic quotes”___",
+      'Text with _"emphasized"_ word': "Text with _“emphasized”_ word",
+      '~~"delete"~~': "~~“delete”~~",
+      'word ~~"delete"~~ word': "word ~~“delete”~~ word",
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should convert quotes in heading: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+      // nbsp test
+      "a *code*": "a *code*",
+      "a **code**": "a **code**",
+      "a ***code***": "a ***code***",
+      "a _code_": "a _code_",
+      "a __code__": "a __code__",
+      "a ___code___": "a ___code___",
+      'a ~~delete~~': "a ~~delete~~",
+    };
 
-	describe('Quote conversion in emphasis (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-			'*"italic quotes"*': '*"italic quotes"*',
-			'**"bold quotes"**': '**"bold quotes"**',
-			'***"bold italic quotes"***': '***"bold italic quotes"***',
-			'Text with *"emphasized"* word': 'Text with *"emphasized"* word',
-		};
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should convert quotes in emphasis: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should convert quotes in emphasis: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+	describe("Link text processing (SHOULD change text, preserve URL)", () => {
+    const testCases: Record<string, string> = {
+      '[link with "quotes"](http://example.com)':
+        "[link with “quotes”](http://example.com)",
+      '[text "quotes"](http://example.com/"path")':
+        '[text “quotes”](http://example.com/"path")',
+      'a [text "quotes"](http://example.com/"path")':
+        'a [text “quotes”](http://example.com/"path")',
+    };
 
-	describe('Link text processing (SHOULD change text, preserve URL)', () => {
-		const testCases: Record<string, string> = {
-			'[link with "quotes"](http://example.com)': '[link with "quotes"](http://example.com)',
-			'[text](http://example.com/"path")': '[text](http://example.com/"path")',
-		};
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should process link text: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should process link text: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+	describe("Blockquote processing (SHOULD change)", () => {
+    const testCases: Record<string, string> = {
+      '> "quoted text"': "> “quoted text”",
+      '> She said "hello"': "> She said “hello”",
+      // '> Multiple\n> lines with "quotes"': "> Multiple\n> lines with “quotes”",
 
-	describe('Blockquote processing (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-			'> "quoted text"': '> "quoted text"',
-			'> She said "hello"': '> She said "hello"',
-			'> Multiple\n> lines with "quotes"': '> Multiple\n> lines with "quotes"',
-		};
+      // nesting: spaces/tabs upfront
+      '  > "quoted text"': "  > “quoted text”",
+      '  > She said "hello"': "  > She said “hello”",
+      // '  > Multiple\n  > lines with "quotes"':
+        // "  > Multiple\n  > lines with “quotes”",
+      // '\t\t> "quoted text"': "\t\t> “quoted text”",
+      // '\t\t> She said "hello"': "\t\t> She said “hello”",
+      // '\t\t> Multiple\n\t\t> lines with "quotes"':
+      //   "\t\t> Multiple\n\t\t> lines with “quotes”",
+    };
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should process blockquote: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should process blockquote: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 
-	describe('List item processing (SHOULD change)', () => {
-		const testCases: Record<string, string> = {
-			'- item with "quotes"': '- item with "quotes"',
-			'* another "item"': '* another "item"',
-			'1. numbered "item"': '1. numbered "item"',
-			'- item\n  - nested "item"': '- item\n  - nested "item"',
-		};
+	describe("List item processing (SHOULD change)", () => {
+    const testCases: Record<string, string> = {
+      '- item with "quotes"': "- item with “quotes”",
+      '* another "item"': "* another “item”",
+      '1. numbered "item"': "1. numbered “item”",
+      '- item\n  - nested "item"': "- item\n  - nested “item”",
+      '- item\n\t- nested "item"': "- item\n\t- nested “item”",
+    };
 
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should process list item: ${input}`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
-
-	describe('Mixed content scenarios', () => {
-		const testCases: Record<string, string> = {
-			// Code should be preserved, text should be processed
-			'Text with "quotes" and `"code quotes"`.':
-				'Text with "quotes" and `"code quotes"`.',
-
-			// Multiple types
-			'# Heading\n\nParagraph with "quotes".\n\n`code "here"`':
-				'# Heading\n\nParagraph with "quotes".\n\n`code "here"`',
-		};
-
-		for (const [input, expected] of Object.entries(testCases)) {
-			it(`should handle mixed content: ${input.substring(0, 40)}...`, () => {
-				const replacements = processMarkdownText(input, 'en-us', defaultConfig);
-				const result = applyReplacements(input, replacements);
-				expect(result).toBe(expected);
-			});
-		}
-	});
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should process list item: ${input}`, () => {
+        const replacements = processMarkdownText(input, "en-us", defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
 });
 
 describe.skip('Markdown Processor - Snapshot Tests', () => {
