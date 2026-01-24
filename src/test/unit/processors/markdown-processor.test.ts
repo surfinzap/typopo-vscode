@@ -6,16 +6,8 @@ const defaultConfig: TypopoConfig = {
 	removeLines: false,
 };
 
-describe.skip('Markdown Processor - Assertion Tests (Key:Value Format)', () => {
-	/**
-	 * Test cases in key:value format
-	 * Key = input text
-	 * Value = expected output text after typopo processing
-	 *
-	 * When key === value, the text should NOT be changed (preserved)
-	 * When key !== value, the text should be changed (processed)
-	 */
-	describe('Code block preservation (should NOT change)', () => {
+describe('Markdown Processor / Assertion Tests', () => {
+	describe.only('Code block preservation (should NOT change)', () => {
 		const testCases: Record<string, string> = {
 			// Inline code should be preserved
 			'`"code quotes"`': '`"code quotes"`',
@@ -197,7 +189,7 @@ describe.skip('Markdown Processor - Assertion Tests (Key:Value Format)', () => {
 	});
 });
 
-describe('Markdown Processor - Snapshot Tests', () => {
+describe.skip('Markdown Processor - Snapshot Tests', () => {
 	it('should handle complex markdown document with all features', () => {
 		const input = `---
 title: "Test Document"

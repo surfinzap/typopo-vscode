@@ -14,7 +14,7 @@ const PROCESSABLE_NODES = new Set([
 	'strong',
 	'link',
 	'blockquote',
-	'delete' // strikethrough from GFM
+	'delete' // strikethrough from GitHub flavored MD
 ]);
 
 const SKIP_NODES = new Set([
