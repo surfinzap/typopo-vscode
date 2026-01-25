@@ -91,7 +91,6 @@ describe('Markdown Processor / Assertion Tests', () => {
     }
   });
 
-
 	describe("raw HTML preservation (should NOT change)", () => {
 		const testCases: Record<string, string> = {
       '"quotes" <p id="id">"quotes"</p> "quotes"':
@@ -216,10 +215,9 @@ describe('Markdown Processor / Assertion Tests', () => {
         "  > Multiple\n  > lines with “quotes”", // consecutive is likely a false md syntax, but we need to preserve it anyway, as we don't know user's intent
       '  - > Multiple\n  - > lines with "quotes"':
         "  - > Multiple\n  - > lines with “quotes”",
-      // '\t\t> "quoted text"': "\t\t> “quoted text”",
-      // '\t\t> She said "hello"': "\t\t> She said “hello”",
-      // '\t\t> Multiple\n\t\t> lines with "quotes"':
-      //   "\t\t> Multiple\n\t\t> lines with “quotes”",
+			
+			// tabs should be only used in code blocks (CommonMark specs); thus this is not fixed 
+      '\t\t> "quoted text"': '\t\t> "quoted text"',
     };
 
     for (const [input, expected] of Object.entries(testCases)) {
