@@ -46,7 +46,8 @@ You can:
   - Czech
   - Slovak
 - choose to keep/remove empty lines
-- choose to keep/remove whitespaces before a nested Markdown list
+
+**Note:** Typopo automatically detects markdown files (`.md`, `.mdx`) and preserves code blocks, tables, and formatting. For markdown content in untitled files, set the language mode to "Markdown" in VS Code (bottom-right status bar).
 
 ![Typopo Settings in VS Code](assets/typopo--vs-code-settings.png "Typopo Settings in VS Code")
 

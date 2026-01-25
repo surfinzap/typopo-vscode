@@ -32,14 +32,8 @@ export function activate(context: vscode.ExtensionContext): void {
         removeLines: extensionConfig.get<boolean>('removeLines') || false,
       };
 
-      // Pass config with markdown-specific settings for processor selection
-      const processorConfig = {
-        ...config,
-        keepMarkdownFormatting: extensionConfig.get<boolean>('keepMarkdownFormatting') ?? true,
-      };
-
-      // Find the first processor that should handle this document
-      const processor = processors.find((p) => p.shouldProcess(document, processorConfig));
+      // Find the first processor that should handle this document based on file type
+      const processor = processors.find((p) => p.shouldProcess(document));
 
       if (!processor) {
         // This should never happen since RawTextProcessor always matches

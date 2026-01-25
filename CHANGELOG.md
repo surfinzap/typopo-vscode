@@ -5,14 +5,23 @@
 ## 1.5.0 // 
 
 ### ✨ New features
-- tbd write about better support for fixing the text written in markdown. Before the only rudimentary parts as code blocks or list items were identified and skipped 
+- tbd write about better support for fixing the text written in markdown. Before the only rudimentary parts as code blocks or list items were identified and skipped
 - now when typopo fixes the text, it will skip from fixing:
   - inline code (show example)
   - code (show example)
   - raw HTML within markdown (show example)
-  - YAM:/TOML frontmatter 
-- it keeps the nesting for lists and blockquotes, it keeps empty checkboxes for lists 
+  - YAM:/TOML frontmatter
+- it keeps the nesting for lists and blockquotes, it keeps empty checkboxes for lists
 if you wish to fix the content within the skipped parts you can only select portion you wish to fix
+
+- Markdown files (`.md`, `.mdx`) automatically use AST-aware processing that preserves code blocks, tables, and formatting
+- All other file types use raw text processing
+- For untitled files: set VS Code language mode to "Markdown" (bottom-right status bar) to enable structure-aware processing
+
+- Markdown files (`.md`, `.mdx`) automatically use AST-aware processing that preserves code blocks, tables, and formatting
+  - ⚠️ MDX files: JSX components and JavaScript expressions are partially preserved but may need review
+- All other file types use raw text processing
+
 
 ### 🔨 Maintenance
 - Rewrite extension to typescript

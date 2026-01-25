@@ -27,13 +27,13 @@ describe('RawTextProcessor.shouldProcess', () => {
   it('should always return true (fallback processor)', () => {
     // RawTextProcessor is a fallback and should always match
     const mockDocument = { languageId: 'plaintext' } as any;
-    expect(processor.shouldProcess(mockDocument, {})).toBe(true);
+    expect(processor.shouldProcess(mockDocument)).toBe(true);
 
     const mdDocument = { languageId: 'markdown' } as any;
-    expect(processor.shouldProcess(mdDocument, {})).toBe(true);
+    expect(processor.shouldProcess(mdDocument)).toBe(true);
 
     const anyDocument = { languageId: 'anything' } as any;
-    expect(processor.shouldProcess(anyDocument, {})).toBe(true);
+    expect(processor.shouldProcess(anyDocument)).toBe(true);
   });
 });
 

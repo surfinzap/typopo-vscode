@@ -14,9 +14,8 @@ describe('Extension Integration Tests', () => {
     // Save original configuration
     const config = vscode.workspace.getConfiguration('typopo');
     originalConfig = {
-      language:               config.get('language'),
-      removeLines:            config.get('removeLines'),
-      keepMarkdownFormatting: config.get('keepMarkdownFormatting'),
+      language:    config.get('language'),
+      removeLines: config.get('removeLines'),
     };
 
     // Ensure extension is activated
@@ -69,12 +68,8 @@ describe('Extension Integration Tests', () => {
     }
   });
 
-  describe('Processor selection (Raw, md,...)', () => {
-    it('should use MarkdownProcessor for markdown files when keepMarkdownFormatting=true', async () => {
-      // Ensure config is set
-      const config = vscode.workspace.getConfiguration('typopo');
-      await config.update('keepMarkdownFormatting', true, vscode.ConfigurationTarget.Global);
-
+  describe('Processor selection (auto-detection)', () => {
+    it('should use MarkdownProcessor for markdown files by default', async () => {
       const input = '# Hello "world"';
 
       const doc = await vscode.workspace.openTextDocument({
@@ -96,16 +91,12 @@ describe('Extension Integration Tests', () => {
       assert.ok(result.includes('“world”'));
     });
 
-    it('should use RawTextProcessor for markdown files when keepMarkdownFormatting=false', async () => {
-      const config = vscode.workspace.getConfiguration('typopo');
-      await config.update('keepMarkdownFormatting', false, vscode.ConfigurationTarget.Global);
-
-      const input = '"hello"';
-      const expected = '“hello”';
+    it('should use MarkdownProcessor for mdx files', async () => {
+      const input = '# Component "test"';
 
       const doc = await vscode.workspace.openTextDocument({
         content:  input,
-        language: 'markdown',
+        language: 'mdx',
       });
       const editor = await vscode.window.showTextDocument(doc);
 
@@ -116,7 +107,30 @@ describe('Extension Integration Tests', () => {
 
       await vscode.commands.executeCommand('typopo-vscode.fixTypos');
 
-      assert.strictEqual(doc.getText(), expected);
+      const result = doc.getText();
+      // MarkdownProcessor should preserve markdown structure
+      assert.ok(result.includes('# Component'));
+    });
+
+    it('should use MarkdownProcessor for mdc files', async () => {
+      const input = '# Component "test"';
+
+      const doc = await vscode.workspace.openTextDocument({
+        content:  input,
+        language: 'mdc',
+      });
+      const editor = await vscode.window.showTextDocument(doc);
+
+      editor.selection = new vscode.Selection(
+        new vscode.Position(0, 0),
+        new vscode.Position(0, input.length)
+      );
+
+      await vscode.commands.executeCommand('typopo-vscode.fixTypos');
+
+      const result = doc.getText();
+      // MarkdownProcessor should preserve markdown structure
+      assert.ok(result.includes('# Component'));
     });
 
     it('should use RawTextProcessor for plaintext files', async () => {

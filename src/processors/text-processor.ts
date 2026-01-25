@@ -29,9 +29,10 @@ export interface TypopoConfig {
  */
 export interface TextProcessor {
   /**
-   * Determine if this processor should handle the given document
+   * Determine if this processor should handle the given document based on file type.
+   * Processors are checked in order and the first matching processor is used.
    */
-  shouldProcess(document: vscode.TextDocument, config: any): boolean;
+  shouldProcess(document: vscode.TextDocument): boolean;
 
   /**
    * Process the text and return a list of replacements to apply
@@ -46,15 +47,16 @@ export interface TextProcessor {
 export class MarkdownProcessor implements TextProcessor {
   /**
    * Determines if this processor should handle the document.
-   * Returns true for markdown and mdx files when keepMarkdownFormatting is enabled.
+   * Returns true for markdown and mdx files.
    * @param document - The VS Code document to check
-   * @param config - Extension configuration containing keepMarkdownFormatting option
-   * @returns true if the document is markdown/mdx and formatting should be preserved
+   * @returns true if the document is markdown or mdx
    */
-  shouldProcess(document: vscode.TextDocument, config: any): boolean {
-    const isMarkdownFile = document.languageId === 'markdown' || document.languageId === 'mdx';
-
-    return isMarkdownFile && (config.keepMarkdownFormatting ?? true);
+  shouldProcess(document: vscode.TextDocument): boolean {
+    return (
+      document.languageId === 'markdown' ||
+      document.languageId === 'mdx' ||
+      document.languageId === 'mdc'
+    );
   }
 
   /**
@@ -80,10 +82,9 @@ export class RawTextProcessor implements TextProcessor {
    * Always returns true as this is the fallback processor.
    * This processor should be placed last in the processor chain.
    * @param _document - The VS Code document (unused)
-   * @param _config - Extension configuration (unused)
    * @returns Always true to process any document
    */
-  shouldProcess(_document: vscode.TextDocument, _config: any): boolean {
+  shouldProcess(_document: vscode.TextDocument): boolean {
     return true; // Always matches as fallback
   }
 
