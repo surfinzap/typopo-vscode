@@ -1,28 +1,22 @@
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
-	test: {
-		// Test file patterns - only unit tests
-		include: ['src/test/unit/**/*.test.ts'],
-		exclude: ['node_modules', 'out', '.vscode-test', 'src/test/integration/**'],
+  test: {
+    // Test file patterns - only unit tests
+    include: ['src/test/unit/**/*.test.ts'],
+    exclude: ['node_modules', 'out', '.vscode-test', 'src/test/integration/**'],
 
-		// Environment
-		environment: 'node',
+    // Environment
+    environment: 'node',
 
-		// Coverage configuration (optional)
-		coverage: {
-			provider: 'v8',
-			reporter: ['text', 'json', 'html'],
-			exclude: [
-				'node_modules/',
-				'out/',
-				'src/test/',
-				'**/*.d.ts',
-				'**/*.config.ts',
-			],
-		},
+    // Coverage configuration (optional)
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude:  ['node_modules/', 'out/', 'src/test/', '**/*.d.ts', '**/*.config.ts'],
+    },
 
-		// Test globals (optional - allows using describe/it without imports)
-		globals: true,
-	},
+    // Test globals (optional - allows using describe/it without imports)
+    globals: true,
+  },
 });

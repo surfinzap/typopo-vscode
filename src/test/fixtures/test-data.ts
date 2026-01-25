@@ -3,19 +3,18 @@
  */
 
 export const rawTextProcessorTestSet: Record<string, string> = {
-  '"hello"': "“hello”",
-  "\"outer 'inner' outer\"": "“outer ‘inner’ outer”",
-  "Sentence ending….....": "Sentence ending…",
-  "100 µm3": "100 µm³",
-  "4X object": "4× object",
+  '"hello"':                 '“hello”',
+  '"outer \'inner\' outer"': '“outer ‘inner’ outer”',
+  'Sentence ending….....':   'Sentence ending…',
+  '100 µm3':                 '100 µm³',
+  '4X object':               '4× object',
 };
 
-
 export const langConfigTestSet: Record<string, Record<string, string>> = {
-  "en-us": {
+  'en-us': {
     [`"hello"`]: `“hello”`,
   },
-  "de-de": {
+  'de-de': {
     [`"hello"`]: `„hello“`,
   },
   cs: {
@@ -31,9 +30,9 @@ export const langConfigTestSet: Record<string, Record<string, string>> = {
 
 export const removeLinesConfigTestSet: Record<string, Record<string, string>> = {
   false: {
-    'word\n\n\n"hello"': "word\n\n\n“hello”",
+    'word\n\n\n"hello"': 'word\n\n\n“hello”',
   },
   true: {
-    'word\n\n\n"hello"': "word\n“hello”",
+    'word\n\n\n"hello"': 'word\n“hello”',
   },
 };

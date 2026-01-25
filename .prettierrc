@@ -1,0 +1,15 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "trailingComma": "es5",
+  "alignInGroups": "always",
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "@huggingface/prettier-plugin-vertical-align"
+  ],
+  "importOrder": ["^vscode$", "^@?\\w", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}

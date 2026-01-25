@@ -92,9 +92,27 @@
     "test:unit:ui": "vitest --ui",
     "test:integration": "npm run build && node ./out/test/integration/run-integration-tests.js",
     "pretest": "pnpm run build && pnpm run lint",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --check \"src/**/*.ts\" \"*.config.{ts,mjs,js}\" \"*.json\"",
+    "format:fix": "prettier --write \"src/**/*.ts\" \"*.config.{ts,mjs,js}\" \"*.json\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.config.{ts,mjs,js}": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
+    "@huggingface/prettier-plugin-vertical-align": "^0.1.4",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.0.10",
     "@types/unist": "^3.0.3",
@@ -104,8 +122,12 @@
     "@vitest/ui": "^4.0.18",
     "@vscode/test-electron": "^2.5.2",
     "eslint": "^9.39.2",
+    "eslint-config-prettier": "^9.1.2",
     "glob": "^13.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "mocha": "^11.7.5",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.18"
   },

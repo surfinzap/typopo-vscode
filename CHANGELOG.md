@@ -16,6 +16,7 @@ if you wish to fix the content within the skipped parts you can only select port
 
 ### 🔨 Maintenance
 - Rewrite extension to typescript
+- Add automating code linting and formatting
 
 
 

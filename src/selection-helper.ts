@@ -13,32 +13,32 @@ import { TextProcessor, TypopoConfig, applyReplacements } from './processors/tex
  * @param config - Typopo configuration options
  */
 export function processAndApplySelections(
-	editor: vscode.TextEditor,
-	document: vscode.TextDocument,
-	processor: TextProcessor,
-	language: string,
-	config: TypopoConfig
+  editor: vscode.TextEditor,
+  document: vscode.TextDocument,
+  processor: TextProcessor,
+  language: string,
+  config: TypopoConfig
 ): Thenable<boolean> {
-	return editor.edit(editBuilder => {
-		editor.selections.forEach(selection => {
-			// Handle empty selection (expand to current line)
-			let effectiveSelection = selection;
-			if (selection.isEmpty) {
-				const lineRange = document.lineAt(selection.active).range;
-				effectiveSelection = new vscode.Selection(lineRange.start, lineRange.end);
-			}
+  return editor.edit((editBuilder) => {
+    editor.selections.forEach((selection) => {
+      // Handle empty selection (expand to current line)
+      let effectiveSelection = selection;
+      if (selection.isEmpty) {
+        const lineRange = document.lineAt(selection.active).range;
+        effectiveSelection = new vscode.Selection(lineRange.start, lineRange.end);
+      }
 
-			// Get text for THIS selection only
-			const selectionText = document.getText(effectiveSelection);
+      // Get text for THIS selection only
+      const selectionText = document.getText(effectiveSelection);
 
-			// Process this text (replacements will be relative to selection start, offset 0)
-			const replacements = processor.process(selectionText, language, config);
+      // Process this text (replacements will be relative to selection start, offset 0)
+      const replacements = processor.process(selectionText, language, config);
 
-			// Apply replacements to get fixed text
-			const fixedText = applyReplacements(selectionText, replacements);
+      // Apply replacements to get fixed text
+      const fixedText = applyReplacements(selectionText, replacements);
 
-			// Replace selection with fixed text
-			editBuilder.replace(effectiveSelection, fixedText);
-		});
-	});
+      // Replace selection with fixed text
+      editBuilder.replace(effectiveSelection, fixedText);
+    });
+  });
 }
