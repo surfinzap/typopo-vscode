@@ -48,7 +48,7 @@ This is a horizontal rule:
 
 This is some more text. You can also create [links](https://www.example.com) and include images:
 
-![Alt Text](https://via.placeholder.com/150)
+![Alt "Text"](https://via.placeholder.com/150)
 
 And here's some inline code: `print("Hello, World!")`
 

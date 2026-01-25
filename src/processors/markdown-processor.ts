@@ -22,7 +22,7 @@ const SKIP_NODES = new Set([
 	'inlineCode', // `backtick code`
 	'html', // Raw HTML
 	'yaml', // YAML frontmatter
-	'toml' // TOML frontmatter
+	'toml', // TOML frontmatter
 ]);
 
 /**
@@ -96,11 +96,12 @@ function splitTextWithBlockquoteMarkers(text: string): Token[] {
 
 /**
  * Tokenize parent node text into alternating plain text and inline element segments.
- * Similar to WordPress's wptexturize approach for processing HTML while preserving tags.
  */
 function tokenizeParentText(
 	node: MdastNode,
-	documentText: string
+	documentText: string,
+	language: string,
+	typopoConfig: TypopoConfig
 ): Token[] {
 	const tokens: Token[] = [];
 	const startOffset = node.position!.start.offset;
@@ -132,9 +133,35 @@ function tokenizeParentText(
 			// Skip node (code, inlineCode, etc.) - preserve exactly as-is
 			const elementText = documentText.substring(childStart, childEnd);
 			tokens.push({ type: 'element', value: elementText });
+		} else if (child.type === 'image') {
+			// Special handling for image nodes - process alt text
+			const elementText = documentText.substring(childStart, childEnd);
+
+			// Find alt text in original markdown (between ![...])
+			const altStartIndex = elementText.indexOf('![') + 2;
+			const altEndIndex = elementText.indexOf('](');
+
+			if (altStartIndex > 1 && altEndIndex > altStartIndex) {
+				// Extract and process alt text
+				const originalAlt = elementText.substring(altStartIndex, altEndIndex);
+				const processedAlt = typopo.fixTypos(originalAlt, language, typopoConfig);
+
+				if (originalAlt !== processedAlt) {
+					// Reconstruct image with processed alt text
+					const before = elementText.substring(0, altStartIndex);
+					const after = elementText.substring(altEndIndex);
+					tokens.push({ type: 'element', value: before + processedAlt + after });
+				} else {
+					// No change needed
+					tokens.push({ type: 'element', value: elementText });
+				}
+			} else {
+				// Malformed or empty alt
+				tokens.push({ type: 'element', value: elementText });
+			}
 		} else if (child.children) {
 			// Recursively tokenize children
-			const childTokens = tokenizeParentText(child, documentText);
+			const childTokens = tokenizeParentText(child, documentText, language, typopoConfig);
 			tokens.push(...childTokens);
 		}
 
@@ -178,8 +205,8 @@ export function processMarkdownText(
 				const endOffset = node.position.end.offset;
 				const originalText = documentText.substring(startOffset, endOffset);
 
-				// Tokenize parent text (WordPress-style approach)
-				const tokens = tokenizeParentText(node, documentText);
+				// Tokenize parent text 
+				const tokens = tokenizeParentText(node, documentText, language, typopoConfig);
 
 				// Process only text tokens with typopo, pass through element tokens unchanged
 				// CRITICAL: Preserve full text including whitespace - typopo needs context for nbsp placement
@@ -245,7 +272,6 @@ export function processMarkdownText(
 					});
 				}
 
-				// Skip visiting children since we've already processed this entire subtree
 				return SKIP;
 			}
 		});
