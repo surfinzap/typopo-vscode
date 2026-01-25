@@ -11,7 +11,7 @@
   - code (show example)
   - raw HTML within markdown (show example)
   - YAM:/TOML frontmatter 
-- it keeps the nesting for lists and blockquotes 
+- it keeps the nesting for lists and blockquotes, it keeps empty checkboxes for lists 
 if you wish to fix the content within the skipped parts you can only select portion you wish to fix
 
 ### 🔨 Maintenance
