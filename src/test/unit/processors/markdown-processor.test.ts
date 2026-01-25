@@ -98,7 +98,8 @@ describe('Markdown Processor / Assertion Tests', () => {
 
       '<html><p id="id">"quotes"</p></html>': '<html><p id="id">"quotes"</p></html>',
 
-      '<a href="id">"quotes"</a>': '<a href="id">“quotes”</a>',
+      '<a href="id">"quotes"</a>':          '<a href="id">“quotes”</a>',
+      '<div id="test">"quoted text"</div>': '<div id="test">"quoted text"</div>',
     };
 
     for (const [input, expected] of Object.entries(testCases)) {
@@ -228,6 +229,24 @@ describe('Markdown Processor / Assertion Tests', () => {
 
     for (const [input, expected] of Object.entries(testCases)) {
       it(`should process list item: ${input}`, () => {
+        const replacements = processMarkdownText(input, 'en-us', defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
+
+  describe('Image alt text processing (SHOULD change alt text only)', () => {
+    const testCases: Record<string, string> = {
+      '![Alt "text"](url)':              '![Alt “text”](url)',
+      '![Image...](http://example.com)': '![Image…](http://example.com)',
+      '!["Title"](url)':                 '![“Title”](url)',
+      '![](url)':                        '![](url)',
+      '![Alt "text"](url "title")':      '![Alt “text”](url "title")',
+    };
+
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should process image alt: ${input}`, () => {
         const replacements = processMarkdownText(input, 'en-us', defaultConfig);
         const result = applyReplacements(input, replacements);
         expect(result).toBe(expected);

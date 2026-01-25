@@ -16,3 +16,7 @@ temp/
 # Generated files
 *.log
 pnpm-lock.yaml
+
+# Extras
+README.md 
+CHANGELOG.md
