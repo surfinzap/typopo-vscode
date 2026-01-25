@@ -65,8 +65,8 @@ function tokenizeParentText(
 
 		// Add child content
 		if (child.type === 'text' && child.value) {
-			// Plain text - will be processed by typopo
-			tokens.push({ type: 'text', value: child.value });
+			const textContent = documentText.substring(childStart, childEnd);
+			tokens.push({ type: 'text', value: textContent });
 		} else if (SKIP_NODES.has(child.type)) {
 			// Skip node (code, inlineCode, etc.) - preserve exactly as-is
 			const elementText = documentText.substring(childStart, childEnd);

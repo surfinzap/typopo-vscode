@@ -10,12 +10,12 @@ const defaultConfig: TypopoConfig = {
 describe('Markdown Processor / Assertion Tests', () => {
 	describe('Code block preservation (should NOT change)', () => {
 		const testCases: Record<string, string> = {
-      // Inline code should be preserved
+      // Inline code
       '`"code quotes"`': '`"code quotes"`',
       'text `"inline code"` text': 'text `"inline code"` text',
       'Multiple `"code"` blocks `"here"`': 'Multiple `"code"` blocks `"here"`',
 
-      // Fenced code blocks should be preserved
+      // Fenced code blocks
       '```\n"code block"\n```': '```\n"code block"\n```',
       '```javascript\nconst x = "value";\n```':
         '```javascript\nconst x = "value";\n```',
@@ -57,7 +57,6 @@ describe('Markdown Processor / Assertion Tests', () => {
 
 	describe("YAML frontmatter preservation (should NOT change)", () => {
     const testCases: Record<string, string> = {
-      // Frontmatter should be preserved
       '---\ntitle: "Test"\nauthor: "John"\n---':
         '---\ntitle: "Test"\nauthor: "John"\n---',
 
@@ -76,7 +75,6 @@ describe('Markdown Processor / Assertion Tests', () => {
 
 	describe("TOML frontmatter preservation (should NOT change)", () => {
     const testCases: Record<string, string> = {
-      // Frontmatter should be preserved
       '+++\ntitle: "Test"\nauthor: "John"\n+++':
         '+++\ntitle: "Test"\nauthor: "John"\n+++',
 
@@ -201,13 +199,13 @@ describe('Markdown Processor / Assertion Tests', () => {
     const testCases: Record<string, string> = {
       '> "quoted text"': "> “quoted text”",
       '> She said "hello"': "> She said “hello”",
-      // '> Multiple\n> lines with "quotes"': "> Multiple\n> lines with “quotes”",
+      '> Multiple\n> lines with "quotes"': "> Multiple\n> lines with “quotes”",
 
       // nesting: spaces/tabs upfront
       '  > "quoted text"': "  > “quoted text”",
       '  > She said "hello"': "  > She said “hello”",
       // '  > Multiple\n  > lines with "quotes"':
-        // "  > Multiple\n  > lines with “quotes”",
+      // "  > Multiple\n  > lines with “quotes”",
       // '\t\t> "quoted text"': "\t\t> “quoted text”",
       // '\t\t> She said "hello"': "\t\t> She said “hello”",
       // '\t\t> Multiple\n\t\t> lines with "quotes"':
