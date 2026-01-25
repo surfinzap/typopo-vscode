@@ -38,10 +38,14 @@ Write neat notes without bothering about all the typography rules.
   - [Feedback](#feedback)
   - [License](#license)
 
+
+
 ## Use
 
 1. Select the text you wish to fix (or place a cursor on a line you wish to fix)
 2. Fix it, either by `Typopo: Fix Typos` via the menu or `Ctrl+Alt+T` (Win) or `Ctrl+Cmd+T` (Mac).
+
+
 
 ## Settings
 
@@ -56,7 +60,7 @@ You can:
 
 **Note:** Typopo automatically detects markdown files (`.md`, `.mdx`, `.mdc`) and preserves markdown syntax: code blocks, tables, formatting, and YAML/TOML frontmatter.
 
-![Typopo Settings in VS Code](assets/typopo--vs-code-settings.png 'Typopo Settings in VS Code')
+
 
 ## Features
 

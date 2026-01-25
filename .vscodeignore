@@ -18,7 +18,6 @@ pnpm-lock.yaml
 CLAUDE.md
 CODE_OF_CONDUCT.md
 assets/*.gif
-assets/typopo--vs-code-settings.png
 .claude/
 .husky/
 node_modules
