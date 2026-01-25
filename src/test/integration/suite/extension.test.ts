@@ -1,6 +1,8 @@
 import * as assert from 'assert';
 import * as vscode from 'vscode';
 import { before, after, afterEach, describe, it } from 'mocha';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import {
   rawTextProcessorTestSet,
   langConfigTestSet,
@@ -300,6 +302,32 @@ describe('Extension Integration Tests', () => {
 
       // No assertions needed - just verify no error thrown
       assert.ok(true);
+    });
+  });
+
+  describe('Comprehensive markdown fixture test', () => {
+    it('should correctly process complete markdown document', async () => {
+      const fixturesPath = join(__dirname, '../../../../src/test/fixtures');
+      const source = readFileSync(join(fixturesPath, 'md-source.md'), 'utf-8');
+      const expected = readFileSync(join(fixturesPath, 'md-fixed.md'), 'utf-8');
+
+      const doc = await vscode.workspace.openTextDocument({
+        content:  source,
+        language: 'markdown',
+      });
+      const editor = await vscode.window.showTextDocument(doc);
+
+      // Select all content
+      const lastLine = doc.lineCount - 1;
+      const lastChar = doc.lineAt(lastLine).text.length;
+      editor.selection = new vscode.Selection(
+        new vscode.Position(0, 0),
+        new vscode.Position(lastLine, lastChar)
+      );
+
+      await vscode.commands.executeCommand('typopo-vscode.fixTypos');
+
+      assert.strictEqual(doc.getText(), expected);
     });
   });
 });
