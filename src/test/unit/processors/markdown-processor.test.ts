@@ -199,13 +199,23 @@ describe('Markdown Processor / Assertion Tests', () => {
     const testCases: Record<string, string> = {
       '> "quoted text"': "> “quoted text”",
       '> She said "hello"': "> She said “hello”",
-      '> Multiple\n> lines with "quotes"': "> Multiple\n> lines with “quotes”",
+      '> Multiple\n>\n> lines with "quotes"':
+        "> Multiple\n>\n> lines with “quotes”",
+      '> Multiple\n> lines with "quotes"': "> Multiple\n> lines with “quotes”", // consecutive is likely a false md syntax, but we need to preserve it anyway, as we don't know user's intent
 
-      // nesting: spaces/tabs upfront
+      // nesting
+      '>> "quoted text"': ">> “quoted text”",
+      '> > "quoted text"': "> > “quoted text”",
+
+      // spaces/tabs upfront
       '  > "quoted text"': "  > “quoted text”",
       '  > She said "hello"': "  > She said “hello”",
-      // '  > Multiple\n  > lines with "quotes"':
-      // "  > Multiple\n  > lines with “quotes”",
+      '  > Multiple\n  >\n  > lines with "quotes"':
+        "  > Multiple\n  >\n  > lines with “quotes”",
+      '  > Multiple\n  > lines with "quotes"':
+        "  > Multiple\n  > lines with “quotes”", // consecutive is likely a false md syntax, but we need to preserve it anyway, as we don't know user's intent
+      '  - > Multiple\n  - > lines with "quotes"':
+        "  - > Multiple\n  - > lines with “quotes”",
       // '\t\t> "quoted text"': "\t\t> “quoted text”",
       // '\t\t> She said "hello"': "\t\t> She said “hello”",
       // '\t\t> Multiple\n\t\t> lines with "quotes"':

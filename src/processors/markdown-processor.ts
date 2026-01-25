@@ -35,6 +35,66 @@ interface Token {
 }
 
 /**
+ * Split text containing blockquote continuation markers into element/text tokens.
+ * This ensures typopo only processes actual text content, not markdown syntax.
+ *
+ * Context: Remark parses consecutive blockquote lines like:
+ *   > block
+ *   > block
+ * into a single <p> (which renders as "block block" in HTML, since newlines become spaces).
+ *
+ * We preserve the original markdown structure without interpreting user intent:
+ * - If they wrote `> line\n> line` → preserve it as-is with both `>` markers
+ * - If they wrote `> line\n>\n> line` → preserve it as-is (two paragraphs)
+ *
+ * Technical detail: Remark's text node position offsets span the document range including continuation markers (e.g., `\n  > `), but the `value` field has them stripped out.
+ * This function reconstructs the markers as element tokens so they pass through typopo unchanged, completing the tokenization that remark started but didn't finish.
+ *
+ * Example:
+ *   Input: "Multiple\n  > lines with \"quotes\""
+ *   Output: [
+ *     { type: 'text', value: 'Multiple' },
+ *     { type: 'element', value: '\n  > ' },
+ *     { type: 'text', value: 'lines with "quotes"' }
+ *   ]
+ */
+function splitTextWithBlockquoteMarkers(text: string): Token[] {
+	// If no newlines, return single text token
+	if (!text.includes('\n')) {
+		return [{ type: 'text', value: text }];
+	}
+
+	const lines = text.split('\n');
+	const tokens: Token[] = [];
+
+	for (let i = 0; i < lines.length; i++) {
+		const line = lines[i];
+
+		// Check if line starts with blockquote marker (optional whitespace + > + optional whitespace)
+		const markerMatch = line.match(/^([\s]*>[\s]*)/);
+
+		if (i > 0) {
+			// Add newline + marker as element token (not processed by typopo)
+			if (markerMatch) {
+				tokens.push({ type: 'element', value: '\n' + markerMatch[1] });
+			} else {
+				tokens.push({ type: 'element', value: '\n' });
+			}
+		}
+
+		// Add text content (without marker if present)
+		const textContent = markerMatch ? line.substring(markerMatch[1].length) : line;
+		if (textContent.length > 0 || i === 0) {
+			// Always add token for first line (even if empty)
+			// For other lines, only add if non-empty
+			tokens.push({ type: 'text', value: textContent });
+		}
+	}
+
+	return tokens;
+}
+
+/**
  * Tokenize parent node text into alternating plain text and inline element segments.
  * Similar to WordPress's wptexturize approach for processing HTML while preserving tags.
  */
@@ -66,7 +126,8 @@ function tokenizeParentText(
 		// Add child content
 		if (child.type === 'text' && child.value) {
 			const textContent = documentText.substring(childStart, childEnd);
-			tokens.push({ type: 'text', value: textContent });
+			const splitTokens = splitTextWithBlockquoteMarkers(textContent);
+			tokens.push(...splitTokens);
 		} else if (SKIP_NODES.has(child.type)) {
 			// Skip node (code, inlineCode, etc.) - preserve exactly as-is
 			const elementText = documentText.substring(childStart, childEnd);
