@@ -72,14 +72,6 @@ function tokenizeParentText(
 			const elementText = documentText.substring(childStart, childEnd);
 			tokens.push({ type: 'element', value: elementText });
 		} else if (child.children) {
-			// Inline element with children (emphasis, strong, link, etc.)
-			// Extract opening marker
-			const textBefore = documentText.substring(lastPos, childStart);
-			if (textBefore.length > 0) {
-				// This is handled above in the gap check, but for inline elements
-				// we need to be more careful about extracting just the markers
-			}
-
 			// Recursively tokenize children
 			const childTokens = tokenizeParentText(child, documentText);
 			tokens.push(...childTokens);
