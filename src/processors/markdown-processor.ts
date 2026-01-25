@@ -11,23 +11,18 @@ const PROCESSABLE_NODES = new Set([
   'paragraph',
   'heading',
   'blockquote',
-  'listItem', // Process list items (previously missing)
-  'table', // Tables (including all nested nodes)
+  'listItem',
+  'table',
   'tableRow',
   'tableCell',
 ]);
 
-const SKIP_NODES = new Set([
-  'code', // Fenced code blocks
-  'inlineCode', // `backtick code`
-  'html', // Raw HTML
-  'yaml', // YAML frontmatter
-  'toml', // TOML frontmatter
-]);
+const SKIP_NODES = new Set(['code', 'inlineCode', 'html', 'yaml', 'toml']);
 
 /**
- * Token representing either plain text or an inline element.
-
+ * Represents a segment of markdown content as either processable text or preserved structure.
+ * Text tokens are processed by typopo for typography fixes.
+ * Element tokens (markdown syntax, code, etc.) pass through unchanged.
  */
 interface Token {
   type:  'text' | 'element';
@@ -35,31 +30,20 @@ interface Token {
 }
 
 /**
- * Split text containing blockquote continuation markers into element/text tokens.
- * This ensures typopo only processes actual text content, not markdown syntax.
+ * Splits text containing blockquote continuation markers into text/element tokens.
  *
- * Context: Remark parses consecutive blockquote lines like:
- *   > block
- *   > block
- * into a single <p> (which renders as "block block" in HTML, since newlines become spaces).
+ * Remark's AST (Abstract syntax tree) includes blockquote markers (e.g., `\n  > `) in text node positions but strips
+ * them from values. This reconstructs markers as element tokens so they pass through typopo
+ * unchanged, preserving the original markdown structure.
  *
- * We preserve the original markdown structure without interpreting user intent:
- * - If they wrote `> line\n> line` → preserve it as-is with both `>` markers
- * - If they wrote `> line\n>\n> line` → preserve it as-is (two paragraphs)
+ * @param text - Text that may contain blockquote continuation markers
+ * @returns Array of tokens with markers separated as 'element' type
  *
- * Technical detail: Remark's text node position offsets span the document range including continuation markers (e.g., `\n  > `), but the `value` field has them stripped out.
- * This function reconstructs the markers as element tokens so they pass through typopo unchanged, completing the tokenization that remark started but didn't finish.
- *
- * Example:
- *   Input: "Multiple\n  > lines with \"quotes\""
- *   Output: [
- *     { type: 'text', value: 'Multiple' },
- *     { type: 'element', value: '\n  > ' },
- *     { type: 'text', value: 'lines with "quotes"' }
- *   ]
+ * @example
+ * Input: "Multiple\n  > lines"
+ * Output: [{type: 'text', value: 'Multiple'}, {type: 'element', value: '\n  > '}, {type: 'text', value: 'lines'}]
  */
 function splitTextWithBlockquoteMarkers(text: string): Token[] {
-  // If no newlines, return single text token
   if (!text.includes('\n')) {
     return [{ type: 'text', value: text }];
   }
@@ -95,7 +79,22 @@ function splitTextWithBlockquoteMarkers(text: string): Token[] {
 }
 
 /**
- * Tokenize parent node text into alternating plain text and inline element segments.
+ * Recursively tokenizes a parent AST node into text and element tokens.
+ *
+ * Walks the node tree and separates content into:
+ * - Text tokens: Processable text content (subject to typopo fixes)
+ * - Element tokens: Preserved content (markdown syntax, code blocks, inline code)
+ *
+ * Special handling for:
+ * - Blockquote markers: Separated via splitTextWithBlockquoteMarkers()
+ * - Image alt text: Processed inline with typopo
+ * - Code/HTML nodes: Preserved exactly as-is
+ *
+ * @param node - Parent AST node to tokenize
+ * @param documentText - Full document text for offset-based extraction
+ * @param language - Language code for typopo processing
+ * @param typopoConfig - Typopo configuration options
+ * @returns Array of tokens representing the node's content
  */
 function tokenizeParentText(
   node: MdastNode,
@@ -116,7 +115,7 @@ function tokenizeParentText(
     const childStart = child.position.start.offset;
     const childEnd = child.position.end.offset;
 
-    // Add gap before this child as element token (markdown syntax like "**" or "`")
+    // Preserve markdown syntax between nodes
     if (childStart > lastPos) {
       const gap = documentText.substring(lastPos, childStart);
       if (gap.length > 0) {
@@ -124,13 +123,12 @@ function tokenizeParentText(
       }
     }
 
-    // Add child content
     if (child.type === 'text' && child.value) {
       const textContent = documentText.substring(childStart, childEnd);
       const splitTokens = splitTextWithBlockquoteMarkers(textContent);
       tokens.push(...splitTokens);
     } else if (SKIP_NODES.has(child.type)) {
-      // Skip node (code, inlineCode, etc.) - preserve exactly as-is
+      // Preserve code/HTML nodes unchanged
       const elementText = documentText.substring(childStart, childEnd);
       tokens.push({ type: 'element', value: elementText });
     } else if (child.type === 'image') {
@@ -152,7 +150,6 @@ function tokenizeParentText(
           const after = elementText.substring(altEndIndex);
           tokens.push({ type: 'element', value: before + processedAlt + after });
         } else {
-          // No change needed
           tokens.push({ type: 'element', value: elementText });
         }
       } else {
@@ -160,7 +157,6 @@ function tokenizeParentText(
         tokens.push({ type: 'element', value: elementText });
       }
     } else if (child.children) {
-      // Recursively tokenize children
       const childTokens = tokenizeParentText(child, documentText, language, typopoConfig);
       tokens.push(...childTokens);
     }
@@ -168,7 +164,6 @@ function tokenizeParentText(
     lastPos = childEnd;
   }
 
-  // Add any remaining text after last child
   if (lastPos < endOffset) {
     const gap = documentText.substring(lastPos, endOffset);
     if (gap.length > 0) {
@@ -179,6 +174,22 @@ function tokenizeParentText(
   return tokens;
 }
 
+/**
+ * Main entry point for processing markdown text with typography corrections.
+ *
+ * Uses unified/remark to parse markdown into an AST, then selectively applies typopo
+ * to text content while preserving code blocks, inline code, HTML, and frontmatter.
+ * Handles markdown-specific edge cases like blockquote markers and image alt text.
+ *
+ * The function tokenizes processable nodes (paragraphs, headings, lists, tables, blockquotes)
+ * into text and element segments, applies typopo only to text tokens, then reassembles
+ * the content with proper whitespace handling for markdown formatting.
+ *
+ * @param documentText - Full markdown document text to process
+ * @param language - Language code for typography rules (e.g., 'en-us', 'de-de')
+ * @param typopoConfig - Configuration options (removeLines, etc.)
+ * @returns Array of text replacements to apply to the document
+ */
 export function processMarkdownText(
   documentText: string,
   language: string,
@@ -194,42 +205,36 @@ export function processMarkdownText(
 
     const ast = processor.parse(documentText);
 
-    // Visit parent-level nodes
     visit(ast, undefined, (node: MdastNode) => {
       if (!node.position) return;
       if (SKIP_NODES.has(node.type)) return SKIP;
 
-      // Process parent-level nodes (paragraph, heading, blockquote, listItem)
       if (PROCESSABLE_NODES.has(node.type)) {
         const startOffset = node.position.start.offset;
         const endOffset = node.position.end.offset;
         const originalText = documentText.substring(startOffset, endOffset);
 
-        // Tokenize parent text
         const tokens = tokenizeParentText(node, documentText, language, typopoConfig);
 
-        // Process only text tokens with typopo, pass through element tokens unchanged
-        // CRITICAL: Preserve full text including whitespace - typopo needs context for nbsp placement
+        // CRITICAL: Preserve full text including whitespace; typopo needs context for nbsp placement
         const processedTokens = tokens.map((token, index) => {
           if (token.type === 'text') {
             const hasElementBefore = index > 0 && tokens[index - 1].type === 'element';
             const hasElementAfter =
               index < tokens.length - 1 && tokens[index + 1].type === 'element';
 
-            // Extract leading and trailing whitespace
             const leadingMatch = token.value.match(/^(\s+)/);
             const trailingMatch = token.value.match(/(\s+)$/);
             const leading = leadingMatch ? leadingMatch[1] : '';
             const trailing = trailingMatch ? trailingMatch[1] : '';
 
-            // Process with typopo, using context reconstruction for nbsp when needed
             let processed;
 
             // Context reconstruction for nbsp detection when followed by inline element
             // Typopo's nbsp rules need "word + space + word" context to trigger
             if (hasElementAfter && /\s$/.test(token.value)) {
               // Add dummy word to provide context, let typopo process, then extract our part
-              const dummyWord = 'word';
+              const dummyWord = 'wo\uF8FFrd';
               const withContext = token.value + dummyWord;
               const processedWithContext = typopo.fixTypos(withContext, language, typopoConfig);
 
@@ -240,34 +245,28 @@ export function processMarkdownText(
                 processedWithContext.length - dummyWord.length
               );
             } else {
-              // Normal processing without context reconstruction
               processed = typopo.fixTypos(token.value, language, typopoConfig);
             }
 
             // If typopo removed boundary whitespace, restore it
             // This preserves spaces around markdown elements that typopo might strip
-            // NOTE: Check for ANY whitespace, not just the original - typopo may transform space to nbsp
             const processedLeadingMatch = processed.match(/^(\s+)/);
             const processedTrailingMatch = processed.match(/(\s+)$/);
 
             if (hasElementBefore && leading && !processedLeadingMatch) {
-              // Leading whitespace was completely removed by typopo, restore it
               processed = leading + processed;
             }
             if (hasElementAfter && trailing && !processedTrailingMatch) {
-              // Trailing whitespace was completely removed by typopo, restore it
               processed = processed + trailing;
             }
 
             return processed;
           }
-          return token.value; // Element tokens (markdown syntax, inline code) pass through
+          return token.value; // Element tokens pass through unchanged
         });
 
-        // Reassemble tokens
         const fixedText = processedTokens.join('');
 
-        // Create single replacement for entire parent if text changed
         if (originalText !== fixedText) {
           replacements.push({
             offset:  startOffset,
