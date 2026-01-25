@@ -9,7 +9,7 @@
 
 ## Fix typos in code
 
-![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--html.gif 'Fixing microtypography in VS Code')
+![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--html.gif)
 
 Fix your texts with Typopo, so you don’t need to escape \\"dumb quotes\\" or place \&nbsp;. Typopo will place all the relevant characters for you.
 
@@ -17,7 +17,7 @@ Fix your texts with Typopo, so you don’t need to escape \\"dumb quotes\\" or p
 
 ## Fix typos in Markdown notes
 
-![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--md.gif 'Fixing microtypography in VS Code')
+![Fixing microtypography in VS Code](assets/typopo--vs-code-animation--md.gif)
 
 Write neat notes without bothering about all the typography rules.
 
