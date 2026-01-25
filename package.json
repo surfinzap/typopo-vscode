@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -31,7 +31,7 @@
     "type": "git",
     "url": "https://github.com/surfinzap/typopo-vscode.git"
   },
-  "main": "./out/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -79,14 +79,17 @@
     }
   },
   "scripts": {
-    "build": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "test": "npm run test:unit",
+    "vscode:prepublish": "node esbuild.config.mjs --production",
+    "build": "node esbuild.config.mjs --production",
+    "build:dev": "tsc -p ./",
+    "watch": "node esbuild.config.mjs --watch",
+    "watch:tsc": "tsc -watch -p ./",
+    "test": "vitest run",
     "test:unit": "vitest run",
     "test:unit:watch": "vitest watch",
     "test:unit:ui": "vitest --ui",
-    "test:integration": "npm run build && node ./out/test/integration/run-integration-tests.js",
-    "pretest": "pnpm run build && pnpm run lint",
+    "test:integration": "pnpm run build:dev && node ./out/test/integration/run-integration-tests.js",
+    "pretest": "pnpm run build:dev && pnpm run lint",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --check \"src/**/*.ts\" \"*.config.{ts,mjs,js}\" \"*.json\"",
@@ -116,6 +119,7 @@
     "@typescript-eslint/parser": "^8.53.1",
     "@vitest/ui": "^4.0.18",
     "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.27.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "glob": "^13.0.0",
