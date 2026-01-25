@@ -16,7 +16,7 @@ Checkboxes
 
 ### Header 3
 
-This is a blockquote:
+This is a blockquote:
 
 > Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus maximus sit amet “mauris” nec lacinia. Fusce bibendum magna sed ex vestibulum, eu tincidunt risus sodales.
 > 
@@ -24,16 +24,16 @@ This is a blockquote:
 
 #### Header 4
 
-This is a table:
+This is a table:
 
 | Column 1 | “Column 2” | Column 3 |
 |----------|------------|----------|
-| Cell 1   | Cell 2...  | Cell 3   |
+| Cell 1   | Cell 2…  | Cell 3   |
 | Cell 4   | `"Cell"` 5 | Cell 6   |
 
 ##### Header 5
 
-This is a code block:
+This is a code block:
 
 ```python
 def hello_world():
@@ -42,7 +42,7 @@ def hello_world():
 hello_world()
 ```
 
-This is a horizontal rule:
+This is a horizontal rule:
 
 ---
 

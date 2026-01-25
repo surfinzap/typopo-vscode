@@ -52,7 +52,7 @@ This is some more text. You can also create [links](https://www.example.com) and
 
 And here's some inline code: `print("Hello, World!")`
 
-And here' some ~~"strikethrough"~~ text.
+And here's some ~~"strikethrough"~~ text.
 
 
 ```mermaid

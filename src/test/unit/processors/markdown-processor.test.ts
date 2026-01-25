@@ -2,6 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { processMarkdownText } from '../../../processors/markdown-processor';
 import { TypopoConfig, applyReplacements } from '../../../processors/text-processor';
 import { rawTextProcessorTestSet } from '../../fixtures/test-data';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const defaultConfig: TypopoConfig = {
 	removeLines: false,
@@ -249,5 +251,18 @@ describe('Markdown Processor / Assertion Tests', () => {
         expect(result).toBe(expected);
       });
     }
+  });
+
+  describe("Comprehensive markdown fixture test", () => {
+    it("should correctly process complete markdown document", () => {
+      const fixturesPath = join(__dirname, "../../fixtures");
+      const source = readFileSync(join(fixturesPath, "md-source.md"), "utf-8");
+      const expected = readFileSync(join(fixturesPath, "md-fixed.md"), "utf-8");
+      
+      const replacements = processMarkdownText(source, "en-us", defaultConfig);
+      const result = applyReplacements(source, replacements);
+
+      expect(result).toBe(expected);
+    });
   });
 });
