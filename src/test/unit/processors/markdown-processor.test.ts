@@ -36,15 +36,19 @@ describe('Markdown Processor / Assertion Tests', () => {
 		}
 	});
 
-	describe.skip('Table preservation (should NOT change)', () => {
+	describe('Table preservation', () => {
 		const testCases: Record<string, string> = {
-			// Tables should be completely preserved
-			'| "Header" | "Value" |\n|----------|----------|\n| "data" | "more" |':
-				'| "Header" | "Value" |\n|----------|----------|\n| "data" | "more" |',
+      // Tables should be completely preserved, tableCell content should change
+      '| "Header" | "Value" |\n|----------|----------|\n| "data" | "more" |':
+        "| “Header” | “Value” |\n|----------|----------|\n| “data” | “more” |",
 
-			'| Column |\n|--------|\n| "test" |':
-				'| Column |\n|--------|\n| "test" |',
-		};
+      '| Column |\n|--------|\n| "test" |':
+        "| Column |\n|--------|\n| “test” |",
+
+      // inline code in table 
+      '| Column |\n|--------|\n| `"test"` |':
+        '| Column |\n|--------|\n| `"test"` |',
+    };
 
 		for (const [input, expected] of Object.entries(testCases)) {
 			it(`should preserve table: ${input.substring(0, 30)}...`, () => {

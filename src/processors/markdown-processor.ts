@@ -8,19 +8,19 @@ import { MdastNode } from '../types/remark';
 import type { TextReplacement, TypopoConfig } from './text-processor';
 
 const PROCESSABLE_NODES = new Set([
-	'paragraph',
-	'heading',
-	'blockquote',
-	'listItem', // Process list items (previously missing)
+  "paragraph",
+  "heading",
+  "blockquote",
+  "listItem", // Process list items (previously missing)
+  "table", // Tables (including all nested nodes)
+  "tableRow",
+  "tableCell",
 ]);
 
 const SKIP_NODES = new Set([
 	'code', // Fenced code blocks
 	'inlineCode', // `backtick code`
 	'html', // Raw HTML
-	'table', // Tables (including all nested nodes)
-	'tableRow',
-	'tableCell',
 	'yaml', // YAML frontmatter
 	'toml' // TOML frontmatter
 ]);
