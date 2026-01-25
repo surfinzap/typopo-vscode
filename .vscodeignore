@@ -21,3 +21,6 @@ assets/*.gif
 .claude/
 .husky/
 node_modules
+out/
+esbuild.config.mjs
+vitest.config.ts

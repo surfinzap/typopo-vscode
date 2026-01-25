@@ -2,6 +2,7 @@ node_modules
 .vscode-test/
 *.vsix
 out/
+dist/
 temp/
 coverage/
 CLAUDE.md
