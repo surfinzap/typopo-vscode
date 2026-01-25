@@ -1,0 +1,22 @@
+# Build output
+out/
+dist/
+coverage/
+
+# Dependencies
+node_modules/
+
+# VS Code
+.vscode-test/
+
+# Temporary files
+temp/
+*.vsix
+
+# Generated files
+*.log
+pnpm-lock.yaml
+
+# Extras
+README.md 
+CHANGELOG.md

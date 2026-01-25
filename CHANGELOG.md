@@ -1,6 +1,55 @@
 # Changelog for Typopo VS Code extension
 
 
+
+## 2.0.0 // 2026-01-25
+
+This major release brings comprehensive markdown support to Typopo. The extension now intelligently understands markdown structure, automatically preserving code blocks, inline code, HTML, and frontmatter while fixing typography in your prose. File type detection is automatic—just open a markdown file and fix typos without any configuration.
+
+### ✨ New features
+
+Typopo now features **structure-aware markdown processing**. The extension parses your markdown files using an Abstract Syntax Tree (AST), allowing it to intelligently distinguish between code/syntax elements (which should be preserved) and prose content (which should be fixed). This means you can now select and fix an entire markdown file without worrying about corrupting code blocks or inline code.
+
+**What gets automatically skipped:**
+- **Inline code**: `` `"code with quotes"` `` → preserved unchanged
+- **Code blocks**:
+  ````python
+  print("Hello, World!")  # Straight quotes preserved
+  ````
+- **Raw HTML**: `<div id="test">"quoted text"</div>` → unchanged
+- **YAML/TOML frontmatter**: Front matter data preserved exactly
+
+**What gets processed:**
+
+While preserving code and syntax, Typopo fixes typography in all prose content:
+- Paragraphs and headings
+- List items (while maintaining nesting and checkboxes)
+- Blockquote content
+- Table cell content
+- Image alt text
+- Link text (URLs are preserved)
+
+**Auto-detection:**
+
+File type detection is automatic. Typopo recognizes markdown files (`.md`, `.mdx`, `.mdc`) based on VS Code’s language mode and applies structure-aware processing automatically. No configuration needed.
+
+**Usage notes:**
+- For untitled files: Set VS Code language mode to "Markdown" (bottom-right status bar) to enable structure-aware processing
+- To fix content within skipped elements (like text inside `“inline code”`), select only the specific text you want to process
+- **Caution for MDX/MDC files**: Be mindful of JSX syntax in `*.mdx` files or custom components in `*.mdc` files, as these are supported yet. Support for these extensions will be enhanced in future releases.
+
+### 💥 Breaking changes
+The following settings have been removed, as their functionality is now handled automatically via markdown processing:
+- **`removeWhitespacesBeforeMarkdownList`** — Markdown structure (including list nesting) is now preserved automatically
+- **`keepMarkdownCodeBlocks`** — Code blocks are now automatically detected and skipped; no manual configuration needed
+
+### 🔨 Maintenance
+- Complete rewrite of extension codebase to TypeScript for improved type safety and maintainability
+- Implement comprehensive testing infrastructure (Vitest for unit tests, Mocha for integration tests)
+- Add automated code linting (ESLint) and formatting (Prettier) to maintain code quality
+
+
+
 ## 1.4.5 // 2026-01-16
 
 ### 📦️ Updates

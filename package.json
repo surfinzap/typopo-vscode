@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-  "version": "1.4.5",
+  "version": "2.0.0",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -31,10 +31,7 @@
     "type": "git",
     "url": "https://github.com/surfinzap/typopo-vscode.git"
   },
-  "activationEvents": [
-    "onCommand:typopo-vscode.fixTypos"
-  ],
-  "main": "./extension.js",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
@@ -77,27 +74,64 @@
           "type": "boolean",
           "default": false,
           "description": "Remove empty lines between paragraphs"
-        },
-        "typopo.removeWhitespacesBeforeMarkdownList": {
-          "type": "boolean",
-          "default": false,
-          "description": "Remove whitespaces before a nested Markdown list"
-        },
-        "typopo.keepMarkdownCodeBlocks": {
-          "type": "boolean",
-          "default": true,
-          "description": "Keep Markdown `code blocks` in your Markdown files"
         }
       }
     }
   },
   "scripts": {
-    "lint": "eslint extension.js"
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run test:unit",
+    "test:unit": "vitest run",
+    "test:unit:watch": "vitest watch",
+    "test:unit:ui": "vitest --ui",
+    "test:integration": "npm run build && node ./out/test/integration/run-integration-tests.js",
+    "pretest": "pnpm run build && pnpm run lint",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --check \"src/**/*.ts\" \"*.config.{ts,mjs,js}\" \"*.json\"",
+    "format:fix": "prettier --write \"src/**/*.ts\" \"*.config.{ts,mjs,js}\" \"*.json\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.config.{ts,mjs,js}": [
+      "prettier --write"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
-    "eslint": "^9.39.2"
+    "@huggingface/prettier-plugin-vertical-align": "^0.2.3",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^25.0.10",
+    "@types/unist": "^3.0.3",
+    "@types/vscode": "^1.104.0",
+    "@typescript-eslint/eslint-plugin": "^8.53.1",
+    "@typescript-eslint/parser": "^8.53.1",
+    "@vitest/ui": "^4.0.18",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "glob": "^13.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "mocha": "^11.7.5",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   },
   "dependencies": {
-    "typopo": "^2.9.1"
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "typopo": "^2.9.1",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
   }
 }

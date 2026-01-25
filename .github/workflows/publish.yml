@@ -16,7 +16,14 @@ jobs:
         with:
           node-version: '20'
 
-      - run: npm install
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - run: pnpm install
+
+      - name: Compile TypeScript
+        run: pnpm run build
 
       - name: Publish to Visual Studio Marketplace
         env:

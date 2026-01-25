@@ -1,5 +1,9 @@
 node_modules
 .vscode-test/
 *.vsix
-CLAUDE.md 
-.claude 
+out/
+temp/
+coverage/
+CLAUDE.md
+.claude
+nul
