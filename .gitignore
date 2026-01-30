@@ -8,3 +8,5 @@ coverage/
 CLAUDE.md
 .claude
 nul
+.yalc
+yalc.lock

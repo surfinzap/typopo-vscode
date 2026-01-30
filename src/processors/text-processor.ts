@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import * as typopo from 'typopo';
+import { TypopoConfiguration, TypopoLocale, fixTypos } from 'typopo';
 import { processMarkdownText } from './markdown-processor';
 
 /**
@@ -67,7 +67,7 @@ export class MarkdownProcessor implements TextProcessor {
    * @param config - Typopo configuration options
    * @returns Array of text replacements to apply
    */
-  process(text: string, language: string, config: TypopoConfig): TextReplacement[] {
+  process(text: string, language: TypopoLocale, config: TypopoConfig): TextReplacement[] {
     return processMarkdownText(text, language, config);
   }
 }
@@ -96,8 +96,8 @@ export class RawTextProcessor implements TextProcessor {
    * @param config - Typopo configuration options
    * @returns Array containing a single replacement for the entire text if changes were made, empty array otherwise
    */
-  process(text: string, language: string, config: TypopoConfig): TextReplacement[] {
-    const fixedText = typopo.fixTypos(text, language, config);
+  process(text: string, language: TypopoLocale, config: TypopoConfig): TextReplacement[] {
+    const fixedText = fixTypos(text, language, config);
 
     if (fixedText !== text) {
       return [
