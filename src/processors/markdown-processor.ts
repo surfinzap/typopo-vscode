@@ -3,7 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import { visit, SKIP } from 'unist-util-visit';
-import { fixTypos, TypopoLocale, TypopoConfiguration } from 'typopo';
+import { fixTypos, TypopoLocale } from 'typopo';
 import { MdastNode } from '../types/remark';
 import type { TextReplacement, TypopoConfig } from './text-processor';
 

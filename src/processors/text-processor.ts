@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { TypopoConfiguration, TypopoLocale, fixTypos } from 'typopo';
+import { TypopoLocale, fixTypos } from 'typopo';
 import { processMarkdownText } from './markdown-processor';
 
 /**

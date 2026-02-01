@@ -18,8 +18,8 @@ importers:
         specifier: ^11.0.0
         version: 11.0.0
       typopo:
-        specifier: ^2.9.1
-        version: 2.9.1
+        specifier: ^3.0.0
+        version: 3.0.0
       unified:
         specifier: ^11.0.5
         version: 11.0.5
@@ -1656,8 +1656,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typopo@2.9.1:
-    resolution: {integrity: sha512-DcPC5F1B6NMgYPfpQd8qxY4pbjJF3Gn5Q+1VnksHEsOZB1V1ObyvxsY1sdQLWgRypUmGMwRSldcr68tooGGAfw==}
+  typopo@3.0.0:
+    resolution: {integrity: sha512-7NfDCrDEux+/rRIVDCB2DxuRJI3eai3fbqfElTdP8rjpDMv+m9j+FzIlLqVaCrpsCgcjjt4ORcNhvbJnUcsdog==}
     engines: {node: '>=6.9.4'}
 
   undici-types@7.16.0:
@@ -3488,7 +3488,7 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  typopo@2.9.1: {}
+  typopo@3.0.0: {}
 
   undici-types@7.16.0: {}
 
