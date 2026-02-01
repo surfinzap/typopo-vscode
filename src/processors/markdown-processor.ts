@@ -3,7 +3,7 @@ import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkFrontmatter from 'remark-frontmatter';
 import { visit, SKIP } from 'unist-util-visit';
-import * as typopo from 'typopo';
+import { fixTypos, TypopoLocale } from 'typopo';
 import { MdastNode } from '../types/remark';
 import type { TextReplacement, TypopoConfig } from './text-processor';
 
@@ -99,7 +99,7 @@ function splitTextWithBlockquoteMarkers(text: string): Token[] {
 function tokenizeParentText(
   node: MdastNode,
   documentText: string,
-  language: string,
+  language: TypopoLocale,
   typopoConfig: TypopoConfig
 ): Token[] {
   const tokens: Token[] = [];
@@ -142,7 +142,7 @@ function tokenizeParentText(
       if (altStartIndex > 1 && altEndIndex > altStartIndex) {
         // Extract and process alt text
         const originalAlt = elementText.substring(altStartIndex, altEndIndex);
-        const processedAlt = typopo.fixTypos(originalAlt, language, typopoConfig);
+        const processedAlt = fixTypos(originalAlt, language, typopoConfig);
 
         if (originalAlt !== processedAlt) {
           // Reconstruct image with processed alt text
@@ -192,7 +192,7 @@ function tokenizeParentText(
  */
 export function processMarkdownText(
   documentText: string,
-  language: string,
+  language: TypopoLocale,
   typopoConfig: TypopoConfig
 ): TextReplacement[] {
   const replacements: TextReplacement[] = [];
@@ -236,7 +236,7 @@ export function processMarkdownText(
               // Add dummy word to provide context, let typopo process, then extract our part
               const dummyWord = 'wo\uF8FFrd';
               const withContext = token.value + dummyWord;
-              const processedWithContext = typopo.fixTypos(withContext, language, typopoConfig);
+              const processedWithContext = fixTypos(withContext, language, typopoConfig);
 
               // Extract just the token part (everything before the dummy word)
               // If nbsp was added by typopo, it will be preserved
@@ -245,7 +245,7 @@ export function processMarkdownText(
                 processedWithContext.length - dummyWord.length
               );
             } else {
-              processed = typopo.fixTypos(token.value, language, typopoConfig);
+              processed = fixTypos(token.value, language, typopoConfig);
             }
 
             // If typopo removed boundary whitespace, restore it

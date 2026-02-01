@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -112,11 +112,11 @@
     "@huggingface/prettier-plugin-vertical-align": "^0.2.3",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^25.0.10",
+    "@types/node": "^25.1.0",
     "@types/unist": "^3.0.3",
     "@types/vscode": "^1.104.0",
-    "@typescript-eslint/eslint-plugin": "^8.53.1",
-    "@typescript-eslint/parser": "^8.53.1",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
     "@vitest/ui": "^4.0.18",
     "@vscode/test-electron": "^2.5.2",
     "esbuild": "^0.27.2",
@@ -134,7 +134,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-parse": "^11.0.0",
-    "typopo": "^2.9.1",
+    "typopo": "^3.0.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0"
   }

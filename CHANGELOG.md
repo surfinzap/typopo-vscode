@@ -2,6 +2,14 @@
 
 
 
+## 2.0.2 // 2026-02-01
+
+### 📦️ Updates
+- Bump Typopo package to its latest version ([3.0.0](https://github.com/surfinzap/typopo/releases/tag/3.0.0))
+- Bump devDependencies to their latest versions
+
+
+
 ## 2.0.0 // 2026-01-25
 
 This major release brings comprehensive markdown support to Typopo. The extension now intelligently understands markdown structure, automatically preserving code blocks, inline code, HTML, and frontmatter while fixing typography in your prose. File type detection is automatic—just open a markdown file and fix typos without any configuration.
