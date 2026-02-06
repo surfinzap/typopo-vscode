@@ -2,6 +2,14 @@
 
 
 
+## 2.0.3 // 2026-
+
+### 📦️ Updates
+- Bump devDependencies to their latest versions
+
+
+
+
 ## 2.0.2 // 2026-02-01
 
 ### 📦️ Updates
