@@ -4,7 +4,6 @@
 
 ## 2.0.3 // 2026-02-20
 
-
 ### 🐛 Fixes
 - Typography fixes now work correctly after inline formatting (bold, italic, strikethrough) in Markdown. Previously, non-breaking spaces and em dashes weren’t applied when text followed formatted text—for example, `*a* word` now properly gets a non-breaking space, and `**word** - word` correctly converts to an em dash.
 
