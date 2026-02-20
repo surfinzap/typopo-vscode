@@ -138,7 +138,7 @@ describe('Markdown Processor / Assertion Tests', () => {
     }
   });
 
-  describe('Quote conversion in inline styles (SHOULD change)', () => {
+  describe('Fix typos in inline styles (SHOULD change)', () => {
     const testCases: Record<string, string> = {
       '*"italic quotes"*':             '*“italic quotes”*',
       '**"bold quotes"**':             '**“bold quotes”**',
@@ -150,8 +150,20 @@ describe('Markdown Processor / Assertion Tests', () => {
       'Text with _"emphasized"_ word': 'Text with _“emphasized”_ word',
       '~~"delete"~~':                  '~~“delete”~~',
       'word ~~"delete"~~ word':        'word ~~“delete”~~ word',
+    };
 
-      // nbsp test
+    for (const [input, expected] of Object.entries(testCases)) {
+      it(`should convert quotes in emphasis: ${input}`, () => {
+        const replacements = processMarkdownText(input, 'en-us', defaultConfig);
+        const result = applyReplacements(input, replacements);
+        expect(result).toBe(expected);
+      });
+    }
+  });
+
+  describe('Fix typos around inline styles (SHOULD change)', () => {
+    const testCases: Record<string, string> = {
+      // nbsp after a single-letter preposition test before inline styles
       'a *code*':     'a *code*',
       'a **code**':   'a **code**',
       'a ***code***': 'a ***code***',
@@ -159,6 +171,23 @@ describe('Markdown Processor / Assertion Tests', () => {
       'a __code__':   'a __code__',
       'a ___code___': 'a ___code___',
       'a ~~delete~~': 'a ~~delete~~',
+      'a `code`':     'a `code`',
+
+      // nbsp test after inline styles
+      '*a* code': '*a* code',
+
+      // em dash spacing after inline styles
+      '**something** - removed': '**something**—removed',
+
+      // false positive (multi-char words and no nbsp)
+      'no *code*':     'no *code*',
+      'no **code**':   'no **code**',
+      'no ***code***': 'no ***code***',
+      'no _code_':     'no _code_',
+      'no __code__':   'no __code__',
+      'no ___code___': 'no ___code___',
+      'no ~~delete~~': 'no ~~delete~~',
+      'no `code`':     'no `code`',
     };
 
     for (const [input, expected] of Object.entries(testCases)) {

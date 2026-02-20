@@ -216,7 +216,7 @@ export function processMarkdownText(
 
         const tokens = tokenizeParentText(node, documentText, language, typopoConfig);
 
-        // CRITICAL: Preserve full text including whitespace; typopo needs context for nbsp placement
+        // Process text tokens with typopo, preserve element tokens unchanged
         const processedTokens = tokens.map((token, index) => {
           if (token.type === 'text') {
             const hasElementBefore = index > 0 && tokens[index - 1].type === 'element';
@@ -230,33 +230,77 @@ export function processMarkdownText(
 
             let processed;
 
-            // Context reconstruction for nbsp detection when followed by inline element
-            // Typopo's nbsp rules need "word + space + word" context to trigger
-            if (hasElementAfter && /\s$/.test(token.value)) {
-              // Add dummy word to provide context, let typopo process, then extract our part
-              const dummyWord = 'wo\uF8FFrd';
-              const withContext = token.value + dummyWord;
-              const processedWithContext = fixTypos(withContext, language, typopoConfig);
+            // Context reconstruction: Typopo needs "word + space + word" to apply nbsp/em-dash rules
+            const dummyPrefix = 'x\uF8FFy'; // Short word for nbsp compatibility
+            const dummySuffix = 'wo\uF8FFrd'; // Standard context word
 
-              // Extract just the token part (everything before the dummy word)
-              // If nbsp was added by typopo, it will be preserved
+            const isSimpleMarkdownDelimiter = (elementValue: string): boolean => {
+              return /^(\*{1,3}|_{1,3}|~{2})$/.test(elementValue);
+            };
+
+            const getPrecedingWord = (): string => {
+              for (let i = index - 1; i >= 0; i--) {
+                if (tokens[i].type === 'text') {
+                  const match = tokens[i].value.match(/(\S+)\s*$/);
+                  if (match) return match[1];
+                } else if (!isSimpleMarkdownDelimiter(tokens[i].value)) {
+                  break; // Stop at inline code/HTML
+                }
+              }
+              return dummyPrefix;
+            };
+
+            const shouldAddPrefixContext =
+              hasElementBefore &&
+              /^\s/.test(token.value) &&
+              isSimpleMarkdownDelimiter(tokens[index - 1].value);
+
+            const shouldAddSuffixContext = hasElementAfter && /\s$/.test(token.value);
+
+            let prefixContextAdded = false;
+            let suffixContextAdded = false;
+
+            if (shouldAddPrefixContext && shouldAddSuffixContext) {
+              // Text surrounded by delimiters: "*bold* - *italic*"
+              const precedingWord = getPrecedingWord();
+              const withContext = precedingWord + token.value + dummySuffix;
+              const processedWithContext = fixTypos(withContext, language, typopoConfig);
+              processed = processedWithContext.substring(
+                precedingWord.length,
+                processedWithContext.length - dummySuffix.length
+              );
+              prefixContextAdded = true;
+              suffixContextAdded = true;
+            } else if (shouldAddPrefixContext) {
+              // Text follows delimiter: "*a* code" or "**something** - removed"
+              const precedingWord = getPrecedingWord();
+              const withContext = precedingWord + token.value;
+              const processedWithContext = fixTypos(withContext, language, typopoConfig);
+              processed = processedWithContext.substring(precedingWord.length);
+              prefixContextAdded = true;
+            } else if (shouldAddSuffixContext) {
+              // Text precedes element: "a *code*"
+              const withContext = token.value + dummySuffix;
+              const processedWithContext = fixTypos(withContext, language, typopoConfig);
               processed = processedWithContext.substring(
                 0,
-                processedWithContext.length - dummyWord.length
+                processedWithContext.length - dummySuffix.length
               );
+              suffixContextAdded = true;
             } else {
+              // No context needed
               processed = fixTypos(token.value, language, typopoConfig);
             }
 
-            // If typopo removed boundary whitespace, restore it
-            // This preserves spaces around markdown elements that typopo might strip
+            // Restore whitespace only on sides where context wasn't added
+            // (typopo may intentionally modify whitespace when context is provided)
             const processedLeadingMatch = processed.match(/^(\s+)/);
             const processedTrailingMatch = processed.match(/(\s+)$/);
 
-            if (hasElementBefore && leading && !processedLeadingMatch) {
+            if (!prefixContextAdded && hasElementBefore && leading && !processedLeadingMatch) {
               processed = leading + processed;
             }
-            if (hasElementAfter && trailing && !processedTrailingMatch) {
+            if (!suffixContextAdded && hasElementAfter && trailing && !processedTrailingMatch) {
               processed = processed + trailing;
             }
 
