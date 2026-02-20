@@ -20,3 +20,6 @@ pnpm-lock.yaml
 # Extras
 README.md 
 CHANGELOG.md
+
+# Specific tests
+src/text/fixtures/
