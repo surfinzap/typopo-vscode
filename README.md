@@ -1,7 +1,8 @@
 # Typopo extension for VS Code
 
-![Version](https://img.shields.io/visual-studio-marketplace/v/brano.typopo-vscode?color=%237b00cb&label=Visual%20Studio%20Marketplace&style=flat-square)
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Fix%20frequent%20microtypography%20errors%20in%20multiple%20languages%20in%20VS%20Code%20with%20Typopo&url=https://typopo.org&hashtags=vscode,typos,typography,microtypography) [![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=typopo_app)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/surfinzap/typopo-vscode?color=7b00cb&style=flat)
+![GitHub](https://img.shields.io/github/license/surfinzap/typopo-vscode?color=7b00cb&style=flat)
+[![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow%20Typopo)](https://twitter.com/intent/follow?screen_name=typopo_app)
 
 > Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.
 

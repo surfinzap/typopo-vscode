@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { TypopoLocale, fixTypos } from 'typopo';
-import { processMarkdownText } from './markdown-processor';
+import { processMdcText } from './mdc-processor';
 
 /**
  * Represents a text replacement operation with position and content.
@@ -68,7 +68,7 @@ export class MarkdownProcessor implements TextProcessor {
    * @returns Array of text replacements to apply
    */
   process(text: string, language: TypopoLocale, config: TypopoConfig): TextReplacement[] {
-    return processMarkdownText(text, language, config);
+    return processMdcText(text, language, config);
   }
 }
 
