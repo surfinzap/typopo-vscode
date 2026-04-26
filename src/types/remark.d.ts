@@ -21,6 +21,11 @@ declare module 'remark-frontmatter' {
   export default plugin;
 }
 
+declare module 'remark-mdc' {
+  const plugin: any;
+  export default plugin;
+}
+
 declare module 'unist-util-visit' {
   export function visit(
     tree: any,
@@ -36,8 +41,10 @@ export interface Position {
 }
 
 export interface MdastNode {
-  type:      string;
-  position?: Position;
-  value?:    string;
-  children?: MdastNode[];
+  type:        string;
+  position?:   Position;
+  value?:      string;
+  children?:   MdastNode[];
+  name?:       string; // MDC: component name (containerComponent, textComponent)
+  attributes?: Record<string, string>; // MDC: parsed prop attributes
 }

@@ -6,7 +6,7 @@ dist/
 temp/
 coverage/
 CLAUDE.md
-.claude
+.claude/settings.local.json
 nul
 .yalc
 yalc.lock

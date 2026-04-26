@@ -1,0 +1,35 @@
+---
+title: "Getting Started..."
+description: "A guide for beginners..."
+---
+
+# Getting Started...
+
+Welcome to the documentation. What you will learn:
+
+- Install the package...
+- Configure the options...
+
+::callout{type="info" title="Before you begin..."}
+Make sure you have Node.js 18 or higher. Perhaps...
+::
+
+## Installation...
+
+```bash
+npm install my-package
+```
+
+::card{title="Quick tip..." no-shadow}
+Use `npm ci` for "reproducible" builds...
+::
+
+A paragraph with **bold** and _italic_ text.
+
+A :badge[New feature...] is available.
+
+> A "blockquote" with content...
+
+| Column 1 | Column 2... |
+| -------- | ----------- |
+| Cell 1   | Cell 2...   |

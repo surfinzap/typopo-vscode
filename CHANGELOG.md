@@ -1,5 +1,14 @@
 # Changelog for Typopo VS Code extension
 
+
+
+## 2.1.0 // 2026-04-26 
+
+### ✨ New features
+- Add dedicated support for Nuxt Content markdown components. Typography is now fixed inside component slot content, inline component brackets (`:badge[New feature...]` → `:badge[New feature…]`), and string prop values (`{title="Hello..."}` → `{title="Hello…"}`), while component names, delimiters, and non-string props are preserved unchanged.
+
+
+
 ## 2.0.4 // 2026-04-26
 
 ### 📦️ Updates
