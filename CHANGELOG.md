@@ -2,6 +2,14 @@
 
 
 
+## 2.1.1 // 2026-05-16
+
+### 📦️ Updates
+- Bump Typopo package to its latest version ([3.0.2](https://github.com/surfinzap/typopo/releases/tag/3.0.2))
+- Bump devDependencies to their latest versions
+
+
+
 ## 2.1.0 // 2026-04-26 
 
 ### ✨ New features
