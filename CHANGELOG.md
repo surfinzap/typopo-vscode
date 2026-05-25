@@ -1,6 +1,15 @@
 # Changelog for Typopo VS Code extension
 
 
+## 2.2.0 // 2026-05-26
+
+### ✨ New features
+- Bump Typopo package to its latest version ([3.1.0](https://github.com/surfinzap/typopo/releases/tag/3.1.0)), supporting new locale:  Swiss Standard German (`de-ch`)
+
+### 📦️ Updates
+- Bump devDependencies to their latest versions
+
+
 
 ## 2.1.1 // 2026-05-16
 

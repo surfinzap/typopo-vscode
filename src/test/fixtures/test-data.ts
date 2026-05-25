@@ -17,6 +17,9 @@ export const langConfigTestSet: Record<string, Record<string, string>> = {
   'de-de': {
     [`"hello"`]: `„hello“`,
   },
+  'de-ch': {
+    [`"hello"`]: `«hello»`,
+  },
   cs: {
     [`"hello"`]: `„hello“`,
   },

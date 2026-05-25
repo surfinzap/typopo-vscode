@@ -4,7 +4,7 @@
 ![GitHub](https://img.shields.io/github/license/surfinzap/typopo-vscode?color=7b00cb&style=flat)
 [![Follow](https://img.shields.io/twitter/follow/typopo_app.svg?style=social&label=Follow%20Typopo)](https://twitter.com/intent/follow?screen_name=typopo_app)
 
-> Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.
+> Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Swiss German, Slovak, Czech and Rusyn language.
 
 
 
@@ -54,6 +54,7 @@ You can:
 - set a default language for typography rules:
   - English
   - German
+  - Swiss German
   - Rusyn
   - Czech
   - Slovak
@@ -68,6 +69,7 @@ You can:
 Typopo fixes microtypography hiccups in five languages:
 - English
 - German
+- Swiss German
 - Czech
 - Slovak
 - Rusyn
