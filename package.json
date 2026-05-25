@@ -1,8 +1,8 @@
 {
   "name": "typopo-vscode",
   "displayName": "Typopo",
-  "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Slovak, Czech and Rusyn language.",
-  "version": "2.1.1",
+  "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Swiss German, Slovak, Czech and Rusyn language.",
+  "version": "2.2.0",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -22,6 +22,7 @@
     "typo",
     "English",
     "German",
+    "Swiss German",
     "Slovak",
     "Czech",
     "Rusyn",
@@ -56,6 +57,7 @@
           "enum": [
             "en-us",
             "de-de",
+            "de-ch",
             "cs",
             "rue",
             "sk"
@@ -63,6 +65,7 @@
           "enumDescriptions": [
             "English (US) (en-us)",
             "German (de-de)",
+            "German (de-ch)",
             "Czech (cs)",
             "Rusyn (rue)",
             "Slovak (sk)"
@@ -112,29 +115,29 @@
     "@huggingface/prettier-plugin-vertical-align": "^0.2.4",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.1",
     "@types/unist": "^3.0.3",
     "@types/vscode": "^1.104.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.3",
-    "@typescript-eslint/parser": "^8.59.3",
-    "@vitest/ui": "^4.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.59.4",
+    "@typescript-eslint/parser": "^8.59.4",
+    "@vitest/ui": "^4.1.7",
     "@vscode/test-electron": "^2.5.2",
     "esbuild": "^0.28.0",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
     "glob": "^13.0.6",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.4",
-    "mocha": "^11.7.5",
+    "lint-staged": "^17.0.5",
+    "mocha": "^11.7.6",
     "prettier": "^3.8.3",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdc": "^3.11.0",
     "remark-parse": "^11.0.0",
-    "typopo": "^3.0.2",
+    "typopo": "^3.1.0",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.7"
   }
 }
