@@ -1,4 +1,4 @@
-import * as vscode from 'vscode';
+import type * as vscode from 'vscode';
 import { TypopoLocale, fixTypos } from 'typopo';
 import { processMdcText } from './mdc-processor';
 
@@ -20,7 +20,9 @@ export interface TextReplacement {
  */
 export interface TypopoConfig {
   /** Whether to remove empty lines between paragraphs */
-  removeLines: boolean;
+  removeLines:      boolean;
+  /** Frontmatter keys whose values are prose and should be fixed (Markdown only); none by default */
+  frontmatterKeys?: string[];
 }
 
 /**

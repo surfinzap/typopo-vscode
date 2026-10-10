@@ -1,0 +1,6 @@
+# The npm package holds the command-line tool only; the extension ships as a .vsix (see .vscodeignore)
+/*
+!/dist/
+/dist/*
+!/dist/cli.cjs
+!/CHANGELOG.md

@@ -8,6 +8,7 @@ import { fixTypos, TypopoLocale } from 'typopo';
 import { MdastNode } from '../types/remark';
 import type { TextReplacement, TypopoConfig } from './text-processor';
 import { collectMarkdownReplacements } from './markdown-processor';
+import { collectFrontmatterReplacements } from './frontmatter-processor';
 
 /**
  * Applies typopo to each ="value" pair inside a {attrs} block embedded in a raw text fragment.
@@ -209,6 +210,10 @@ export function processMdcText(
         replacements.push(...propReps);
       }
     });
+
+    replacements.push(
+      ...collectFrontmatterReplacements(ast, parseDocument, language, typopoConfig)
+    );
 
     return replacements;
   } catch (error) {
