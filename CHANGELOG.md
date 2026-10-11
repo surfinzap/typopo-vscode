@@ -1,6 +1,6 @@
 # Changelog for Typopo VS Code extension
 
-## 2.3.0 // 2026-10-
+## 2.3.0 // 2026-10-11
 
 ### ✨ New features
 - Add a new setting, `typopo.frontmatterKeys`, to fix typography in the frontmatter values of your choice in Markdown files, e.g. `title` and `description`. Frontmatter stays unchanged by default.

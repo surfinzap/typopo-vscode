@@ -86,7 +86,24 @@ typopo-vscode [--check] [--locale en-us] [--remove-lines] [--frontmatter-keys ti
 - `--check` writes nothing, lists the lines that would change, and exits with 1 if there are any
 - `--locale` takes the same values as the language setting: `en-us`, `de-de`, `de-ch`, `cs`, `sk`, `rue`
 
-To build it from this repository, run `pnpm build`; the tool is `dist/cli.cjs`.
+To use it in a project, install it as a dev dependency:
+
+```
+pnpm add -D typopo-vscode
+```
+
+(or `npm install -D typopo-vscode`, `yarn add -D typopo-vscode`)
+
+Then run it with `pnpm typopo-vscode --check docs`, or add scripts to your `package.json`:
+
+```json
+"scripts": {
+  "typos": "typopo-vscode docs README.md",
+  "typos:check": "typopo-vscode --check docs README.md"
+}
+```
+
+To try it without installing, run `pnpm dlx typopo-vscode --check README.md` (or `npx typopo-vscode …`).
 
 
 

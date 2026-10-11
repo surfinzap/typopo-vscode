@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Swiss German, Slovak, Czech and Rusyn language.",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -124,7 +124,7 @@
     ]
   },
   "devDependencies": {
-    "@huggingface/prettier-plugin-vertical-align": "^0.2.4",
+    "@huggingface/prettier-plugin-vertical-align": "^0.3.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.9.1",
@@ -132,24 +132,24 @@
     "@types/vscode": "^1.104.0",
     "@typescript-eslint/eslint-plugin": "^8.71.1",
     "@typescript-eslint/parser": "^8.71.1",
-    "@vitest/ui": "^4.1.7",
-    "@vscode/test-electron": "^2.5.2",
-    "esbuild": "^0.28.0",
+    "@vitest/ui": "^5.0.3",
+    "@vscode/test-electron": "^3.1.0",
+    "esbuild": "^0.28.2",
     "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
     "glob": "^13.0.6",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "mocha": "^11.7.6",
+    "mocha": "^12.0.3",
     "prettier": "^3.9.10",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
     "remark-mdc": "^3.11.1",
     "remark-parse": "^11.0.0",
-    "typopo": "^3.1.0",
     "typescript": "^6.0.3",
+    "typopo": "^3.1.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
-    "vitest": "^4.1.7"
+    "vitest": "^5.0.3"
   }
 }
