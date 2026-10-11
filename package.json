@@ -95,6 +95,7 @@
   },
   "scripts": {
     "vscode:prepublish": "node esbuild.config.mjs --production",
+    "prepack": "node esbuild.config.mjs --production",
     "build": "node esbuild.config.mjs --production",
     "build:dev": "tsc -p ./",
     "watch": "node esbuild.config.mjs --watch",
