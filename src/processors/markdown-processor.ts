@@ -6,6 +6,7 @@ import { visit, SKIP } from 'unist-util-visit';
 import { fixTypos, TypopoLocale } from 'typopo';
 import { MdastNode } from '../types/remark';
 import type { TextReplacement, TypopoConfig } from './text-processor';
+import { collectFrontmatterReplacements } from './frontmatter-processor';
 
 const PROCESSABLE_NODES = new Set([
   'paragraph',
@@ -352,7 +353,10 @@ export function processMarkdownText(
       .use(remarkFrontmatter, ['yaml', 'toml'])
       .parse(documentText);
 
-    return collectMarkdownReplacements(ast, documentText, language, typopoConfig);
+    return [
+      ...collectMarkdownReplacements(ast, documentText, language, typopoConfig),
+      ...collectFrontmatterReplacements(ast, documentText, language, typopoConfig),
+    ];
   } catch (error) {
     console.error('Markdown processing failed:', error);
     throw error;

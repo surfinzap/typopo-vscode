@@ -29,7 +29,8 @@ export function activate(context: vscode.ExtensionContext): void {
       const extensionConfig = vscode.workspace.getConfiguration('typopo');
       const language = extensionConfig.get<string>('language') || 'en-us';
       const config: TypopoConfig = {
-        removeLines: extensionConfig.get<boolean>('removeLines') || false,
+        removeLines:     extensionConfig.get<boolean>('removeLines') || false,
+        frontmatterKeys: extensionConfig.get<string[]>('frontmatterKeys') || [],
       };
 
       // Find the first processor that should handle this document based on file type

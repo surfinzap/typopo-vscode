@@ -201,8 +201,8 @@ describe('Markdown Processor / Assertion Tests', () => {
 
   describe('Link text processing (SHOULD change text, preserve URL)', () => {
     const testCases: Record<string, string> = {
-      '[link with "quotes"](http://example.com)':   '[link with “quotes”](http://example.com)',
-      '[text "quotes"](http://example.com/"path")': '[text “quotes”](http://example.com/"path")',
+      '[link with "quotes"](http://example.com)':     '[link with “quotes”](http://example.com)',
+      '[text "quotes"](http://example.com/"path")':   '[text “quotes”](http://example.com/"path")',
       'a [text "quotes"](http://example.com/"path")':
         'a [text “quotes”](http://example.com/"path")',
     };

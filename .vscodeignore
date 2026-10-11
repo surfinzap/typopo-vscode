@@ -4,6 +4,8 @@ src/**
 temp/**
 .gitignore
 .gitattributes
+.npmignore
+dist/cli.cjs
 .npmrc
 .prettierignore
 **/jsconfig.json

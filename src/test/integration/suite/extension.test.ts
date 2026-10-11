@@ -16,8 +16,9 @@ describe('Extension Integration Tests', () => {
     // Save original configuration
     const config = vscode.workspace.getConfiguration('typopo');
     originalConfig = {
-      language:    config.get('language'),
-      removeLines: config.get('removeLines'),
+      language:        config.get('language'),
+      removeLines:     config.get('removeLines'),
+      frontmatterKeys: config.get('frontmatterKeys'),
     };
 
     // Ensure extension is activated
@@ -328,6 +329,52 @@ describe('Extension Integration Tests', () => {
       await vscode.commands.executeCommand('typopo-vscode.fixTypos');
 
       assert.strictEqual(doc.getText(), expected);
+    });
+  });
+
+  describe('Frontmatter keys setting', () => {
+    const input = '---\ntitle: Getting started...\nslug: getting-started...\n---\n\n# Heading...';
+
+    async function fixWholeDocument(frontmatterKeys: string[]): Promise<string> {
+      const config = vscode.workspace.getConfiguration('typopo');
+      await config.update('language', 'en-us', vscode.ConfigurationTarget.Global);
+      await config.update('removeLines', false, vscode.ConfigurationTarget.Global);
+      await config.update('frontmatterKeys', frontmatterKeys, vscode.ConfigurationTarget.Global);
+
+      const doc = await vscode.workspace.openTextDocument({
+        content:  input,
+        language: 'markdown',
+      });
+      const editor = await vscode.window.showTextDocument(doc);
+
+      const lastLine = doc.lineCount - 1;
+      const lastChar = doc.lineAt(lastLine).text.length;
+      editor.selection = new vscode.Selection(
+        new vscode.Position(0, 0),
+        new vscode.Position(lastLine, lastChar)
+      );
+
+      await vscode.commands.executeCommand('typopo-vscode.fixTypos');
+
+      return doc.getText();
+    }
+
+    it('should leave frontmatter unchanged by default', async () => {
+      const result = await fixWholeDocument([]);
+
+      assert.strictEqual(
+        result,
+        '---\ntitle: Getting started...\nslug: getting-started...\n---\n\n# Heading…'
+      );
+    });
+
+    it('should fix only the listed frontmatter keys', async () => {
+      const result = await fixWholeDocument(['title']);
+
+      assert.strictEqual(
+        result,
+        '---\ntitle: Getting started…\nslug: getting-started...\n---\n\n# Heading…'
+      );
     });
   });
 

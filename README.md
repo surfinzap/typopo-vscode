@@ -32,6 +32,7 @@ Write neat notes without bothering about all the typography rules.
   - [Contents](#contents)
   - [Use](#use)
   - [Settings](#settings)
+  - [Command line](#command-line)
   - [Features](#features)
   - [Further use](#further-use)
   - [News \& Releases](#news-releases)
@@ -59,8 +60,50 @@ You can:
   - Czech
   - Slovak
 - choose to keep/remove empty lines
+- list frontmatter keys to fix in Markdown files (`typopo.frontmatterKeys`), e.g. `title` and `description`
 
 **Note:** Typopo automatically detects markdown files (`.md`, `.mdx`, `.mdc`) and preserves markdown syntax: code blocks, tables, formatting, and YAML/TOML frontmatter.
+
+Frontmatter is left unchanged by default. To fix the values that are prose, add their keys in *Settings → Extensions → Typopo → Frontmatter Keys* (*Add Item*), or in `settings.json`:
+
+```json
+"typopo.frontmatterKeys": ["title", "description"]
+```
+
+Only top-level YAML keys with a plain or single-quoted value are fixed, and only when your selection includes the frontmatter from the start of the file (e.g. Select All). Double-quoted values, lists, nested keys and multi-line values are left as they are.
+
+
+
+## Command line
+
+The Markdown processing of the extension can also run from a terminal, on `.md`, `.mdx`, and `.mdc` files:
+
+```
+typopo-vscode [--check] [--locale en-us] [--remove-lines] [--frontmatter-keys title,description] <files or directories…>
+```
+
+- a directory means every `.md`, `.mdx`, and `.mdc` file directly in it
+- `--check` writes nothing, lists the lines that would change, and exits with 1 if there are any
+- `--locale` takes the same values as the language setting: `en-us`, `de-de`, `de-ch`, `cs`, `sk`, `rue`
+
+To use it in a project, install it as a dev dependency:
+
+```
+pnpm add -D typopo-vscode
+```
+
+(or `npm install -D typopo-vscode`, `yarn add -D typopo-vscode`)
+
+Then run it with `pnpm typopo-vscode --check docs`, or add scripts to your `package.json`:
+
+```json
+"scripts": {
+  "typos": "typopo-vscode docs README.md",
+  "typos:check": "typopo-vscode --check docs README.md"
+}
+```
+
+To try it without installing, run `pnpm dlx typopo-vscode --check README.md` (or `npx typopo-vscode …`).
 
 
 

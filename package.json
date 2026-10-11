@@ -2,7 +2,7 @@
   "name": "typopo-vscode",
   "displayName": "Typopo",
   "description": "Fix frequent microtypography errors in multiple languages in VS Code with Typopo. Write neat texts without bothering about typography rules. Typopo works for English, German, Swiss German, Slovak, Czech and Rusyn language.",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "publisher": "brano",
   "icon": "assets/typopo--logotype--128.png",
   "engines": {
@@ -33,6 +33,9 @@
     "url": "https://github.com/surfinzap/typopo-vscode.git"
   },
   "main": "./dist/extension.js",
+  "bin": {
+    "typopo-vscode": "dist/cli.cjs"
+  },
   "contributes": {
     "commands": [
       {
@@ -77,12 +80,22 @@
           "type": "boolean",
           "default": false,
           "description": "Remove empty lines between paragraphs"
+        },
+        "typopo.frontmatterKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "default": [],
+          "markdownDescription": "Frontmatter keys whose values are prose and should be fixed in Markdown files, e.g. `title`, `description`. Applies when the selection includes the frontmatter from the start of the file. Empty (default): frontmatter is never changed."
         }
       }
     }
   },
   "scripts": {
     "vscode:prepublish": "node esbuild.config.mjs --production",
+    "prepack": "node esbuild.config.mjs --production",
     "build": "node esbuild.config.mjs --production",
     "build:dev": "tsc -p ./",
     "watch": "node esbuild.config.mjs --watch",
@@ -112,32 +125,32 @@
     ]
   },
   "devDependencies": {
-    "@huggingface/prettier-plugin-vertical-align": "^0.2.4",
+    "@huggingface/prettier-plugin-vertical-align": "^0.3.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.9.1",
     "@types/unist": "^3.0.3",
     "@types/vscode": "^1.104.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.4",
-    "@typescript-eslint/parser": "^8.59.4",
-    "@vitest/ui": "^4.1.7",
-    "@vscode/test-electron": "^2.5.2",
-    "esbuild": "^0.28.0",
-    "eslint": "^10.4.0",
+    "@typescript-eslint/eslint-plugin": "^8.71.1",
+    "@typescript-eslint/parser": "^8.71.1",
+    "@vitest/ui": "^5.0.3",
+    "@vscode/test-electron": "^3.1.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.12.0",
     "eslint-config-prettier": "^10.1.8",
     "glob": "^13.0.6",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.5",
-    "mocha": "^11.7.6",
-    "prettier": "^3.8.3",
+    "lint-staged": "^17.6.0",
+    "mocha": "^12.0.3",
+    "prettier": "^3.9.10",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
-    "remark-mdc": "^3.11.0",
+    "remark-mdc": "^3.11.1",
     "remark-parse": "^11.0.0",
-    "typopo": "^3.1.0",
     "typescript": "^6.0.3",
+    "typopo": "^3.1.0",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.1.0",
-    "vitest": "^4.1.7"
+    "vitest": "^5.0.3"
   }
 }
